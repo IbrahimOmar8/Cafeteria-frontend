@@ -31,27 +31,26 @@ export class LoginComponent implements OnInit {
     const { username, password } = this.form;
 
     this.authService.login(username, password).subscribe({
-      next: data => {
-        console.log(data);
-        
+      next: data => {        
         this.storageService.saveUser(data);
-
-        // this.isLoginFailed = false;
-        // this.isLoggedIn = true;
-        // this.roles = this.storageService.getUser().roles;
-        // this.reloadPage();
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.roles = this.storageService.getUser().roles;
+        this.reloadPage();
       },
-      // error: err => {
-      //   this.errorMessage = err.error.message;
-      //   console.log(this.errorMessage );
-        
-      //   this.isLoginFailed = true;
-      // }
+       error: err => {
+        this.errorMessage = err.error.message;
+         console.log(this.errorMessage );        
+         this.isLoginFailed = true;
+       }
     });
   }
 
     reloadPage(): void {
       window.location.reload();
     }
+
+
+    
 
 }

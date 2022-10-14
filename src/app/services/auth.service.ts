@@ -41,20 +41,22 @@ export class AuthService {
       JSON.stringify(this.UserModelLogin),
       httpOptions
      )
-     //.pipe(
-    //   //retry(1),
-    //   //catchError(this.handleError)
-    // );
+    .pipe(
+       retry(2),
+       catchError(this.handleError)
+     );
   }
 
-  register(username: string, email: string, password: string): Observable<any> {
+  register(username: string, email: string, password: string , roles :string): Observable<any> {
+
+    const roleslist = [roles]
     return this.http.post(
       environment.BasicURL + 'api/auth/signup',
       {
         username,
         email,
         password,
-
+        roleslist
       },
       httpOptions
     );
