@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -8,7 +9,9 @@ import { UserService } from '../../services/user.service';
 })
 export class HomeComponent implements OnInit {
   content?: string;
-  constructor(private userService: UserService) { }
+  OutPutTestAPI :String = "";
+  constructor(private userService: UserService,
+    private authService:AuthService) { }
 
   ngOnInit(): void {
     this.userService.getPublicContent().subscribe({
@@ -25,6 +28,20 @@ export class HomeComponent implements OnInit {
     });
 
 
+
+
+  }
+
+
+  Testapi(){
+
+  
+  // this.authService.TestCallAPI().subscribe({
+  //   next: data => {
+  //     this.OutPutTestAPI  = JSON.stringify(data);
+  //     //console.log(data);      
+  //   }    
+  // });
   }
 
 }

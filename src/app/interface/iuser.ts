@@ -1,6 +1,7 @@
-export interface IuserRegister {
+export interface Iuser {
     username:string ,
     email:string,
     password:string ,
-    roles:[]
+    roles:[] ,
+    token:string
 }
