@@ -19,13 +19,18 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'user', component: BoardUserComponent },
   { path: 'admin', component: BoardAdminComponent },
-  {path:"**", component: NotFoundComponent},
-  {path:"card", component: CardComponent},
-  {path: "orders",component:OrdersComponent}
+  { path: 'card', component: CardComponent },
+  { path: 'orders', component: OrdersComponent },
+  {
+    path: 'products',
+    loadChildren: () =>
+      import('src/app/products/products.module').then((m) => m.ProductsModule),
+  },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
