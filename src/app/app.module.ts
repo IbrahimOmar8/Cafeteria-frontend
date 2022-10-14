@@ -6,12 +6,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { OrdersComponent } from './components/orders/orders.component';
-import { MyOrdersComponent } from './components/my-orders/my-orders.component';
+import { NavbarComponent } from './component/navbar/navbar.component';
+import { OrdersComponent } from './component/orders/orders.component';
+import { MyOrdersComponent } from './component/my-orders/my-orders.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { CardComponent } from './components/card/card.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import { CardComponent } from './component/card/card.component';
+import { NotFoundComponent } from './component/not-found/not-found.component';
 
 import { LoginComponent } from './component/login/login.component';
 import { RegisterComponent } from './component/register/register.component';
