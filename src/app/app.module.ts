@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CardComponent } from './components/card/card.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { CardComponent } from './components/card/card.component';
     NavbarComponent,
     OrdersComponent,
     MyOrdersComponent,
-    CardComponent
+    CardComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

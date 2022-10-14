@@ -7,17 +7,17 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav w-100">
         <li class="nav-item wdth " >
-          <a class="nav-link active" aria-current="page" href="#">
+          <a class="nav-link "   [routerLink]="['/home']" routerLinkActive="active" aria-current="page" >
             <fa-icon [icon]="faHome" class="fs-3  icons"></fa-icon>
           </a>
         </li>
         <li class="nav-item wdth ">
-          <a class="nav-link" href="#">
+          <a class="nav-link"  [routerLink]="['/order']" routerLinkActive="active" >
             <fa-icon [icon]="faCube" class="fs-3 icons"></fa-icon>
           </a>
         </li>
         <li class="nav-item wdth ">
-          <a class="nav-link" href="#">
+          <a class="nav-link"  [routerLink]="['/user']" routerLinkActive="active" >
             <fa-icon [icon]="user" class="fs-3 icons"></fa-icon>
           </a>
         </li>
