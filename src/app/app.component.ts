@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
+
+
 import { StorageService } from './services/storage.service';
 import { AuthService } from './services/auth.service';
 @Component({
@@ -14,6 +18,8 @@ export class AppComponent {
   username?: string;
 
   title = 'Cafeteria-frontend';
+
+}
 
   constructor(private storageService: StorageService, private authService: AuthService) { }
 
