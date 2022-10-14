@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CardComponent } from './components/card/card.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
-import { OrdersComponent } from './components/orders/orders.component';
+import { CardComponent } from './component/card/card.component';
+import { NotFoundComponent } from './component/not-found/not-found.component';
+import { OrdersComponent } from './component/orders/orders.component';
 
 import { BoardAdminComponent } from './component/board-admin/board-admin.component';
 import { BoardUserComponent } from './component/board-user/board-user.component';

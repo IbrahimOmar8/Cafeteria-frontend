@@ -22,15 +22,13 @@
             <fa-icon [icon]="user" class="fs-3 icons"></fa-icon>
           </a>
         </li>
-        <li class="nav-item wdth ">
-          <a class="nav-link text-bg-danger" [routerLink]="['/products']" routerLinkActive="active">
-            Products
-          </a>
-        </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link ">Disabled</a>
-        </li> -->
       </ul>
+      <ul class="navbar-nav ml-auto" *ngIf="IsAdmin">
+        <li class="nav-item">
+          <a href="/register" class="nav-link" routerLink="register">Add User</a>
+        </li>
+      </ul>
+
     </div>
   </div>
 </nav>
