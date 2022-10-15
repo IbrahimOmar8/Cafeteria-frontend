@@ -58,8 +58,12 @@ export class OrderService {
 }
 
 
-  getOrdersByDate(){
-
+  getOrdersByDate(startDate:any, endDate:any){
+    return this.HttpClient.get<Order>(`${environment.BasicURL}orders/?startDate=${startDate}&endDate=${endDate}`)
+    .pipe(
+      retry(2),
+      catchError(this.handleError)
+      )
   }
 
   getOrdersByUserName(){

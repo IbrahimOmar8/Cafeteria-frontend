@@ -20,8 +20,11 @@ export class ProductsListComponent implements OnInit {
     this.productsService.getProducts().subscribe((data: any) => {
       this.products = data;
       console.log(data);
+       this.productsService.onChangeProd(data)
+      console.log( "p :  "+this.productsService.products) 
+
     });
-  }
+ }
   onDelete(id: number, product: any) {
     const observer = {
       next: () => {
