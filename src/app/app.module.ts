@@ -19,7 +19,11 @@ import { ProfileComponent } from './component/profile/profile.component';
 import { BoardAdminComponent } from './component/board-admin/board-admin.component';
 import { BoardUserComponent } from './component/board-user/board-user.component';
 import { EditOrderComponent } from './component/edit-order/edit-order.component';
+
 import { AddOrderComponent } from './component/add-order/add-order.component';
+
+import { UserProfileComponent } from './component/user-profile/user-profile.component';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +41,8 @@ import { AddOrderComponent } from './component/add-order/add-order.component';
     BoardAdminComponent,
     BoardUserComponent,
     EditOrderComponent,
-    AddOrderComponent
+    AddOrderComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

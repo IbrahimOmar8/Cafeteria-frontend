@@ -9,9 +9,13 @@ import { BoardUserComponent } from './component/board-user/board-user.component'
 import { HomeComponent } from './component/home/home.component';
 import { LoginComponent } from './component/login/login.component';
 import { ProfileComponent } from './component/profile/profile.component';
-import { RegisterComponent } from './component/register/register.component';
+import { RegisterComponent } from './component/register/register.component'
 import { EditOrderComponent } from './component/edit-order/edit-order.component';
 import { AddOrderComponent } from './component/add-order/add-order.component';
+import { UserProfileComponent } from './component/user-profile/user-profile.component';
+import { ProductsListComponent } from './products/products-list/products-list.component';
+import { AdminProfileComponent } from './products/admin-profile/admin-profile.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -27,6 +31,11 @@ const routes: Routes = [
   {path: 'order/add',component:AddOrderComponent} ,
 
   { path: 'orders/edit', component: EditOrderComponent, pathMatch: 'full' },
+  { path: 'userprofile', component: UserProfileComponent },
+  { path: 'adminprofile', component: AdminProfileComponent },
+
+  { path: 'products', component: ProductsListComponent },
+
   { path: '**', component: NotFoundComponent },
 ];
 
