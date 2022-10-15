@@ -11,6 +11,7 @@ import { LoginComponent } from './component/login/login.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { RegisterComponent } from './component/register/register.component';
 import { EditOrderComponent } from './component/edit-order/edit-order.component';
+import { AddOrderComponent } from './component/add-order/add-order.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -22,6 +23,9 @@ const routes: Routes = [
   { path: 'admin', component: BoardAdminComponent },
   { path: 'card', component: CardComponent },
   { path: 'orders', component: OrdersComponent },
+  { path: 'Testorders', component: BoardAdminComponent },
+  {path: 'order/add',component:AddOrderComponent} ,
+
   { path: 'orders/edit', component: EditOrderComponent, pathMatch: 'full' },
   { path: '**', component: NotFoundComponent },
 ];

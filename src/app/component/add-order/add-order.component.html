@@ -1,0 +1,40 @@
+<!-- <form #myForm="ngForm"  (ngSubmit)="addOrder()">
+    <div class="mb-3">
+      <label class="form-label">date</label>
+      <input type="text" class="form-control" name="name"
+      [(ngModel)]="newPrd.name" #inpName="ngModel" required pattern="[A-Za-z]{3,}">
+
+    <div  [hidden]="inpName.valid || inpName.untouched">
+        <p class="text-danger" *ngIf="inpName.errors?.['required']" >  Name is Required  </p>
+
+        <p class="text-danger" *ngIf="inpName.errors?.['pattern']">  Name is too short at least 3 chars  </p>
+    </div>
+     
+      
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Price</label>
+        <input type="number" class="form-control"  name="price" [(ngModel)]="newPrd.price">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Quantity</label>
+        <input type="number" class="form-control" name="quantity" [(ngModel)]="newPrd.quantity">
+    </div>
+
+    <div>
+        <label for=""> Category: </label>
+        <select class="form-select mb-3" name="Category" [(ngModel)]="newPrd.categoryID">
+            <option *ngFor="let cat of catList" [value]="cat.id"> {{cat.name}} </option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Image </label>
+        <input type="file" class="form-control" name="image" [(ngModel)]="newPrd.imageURL">
+    </div>
+
+    
+    <button [disabled]="myForm.invalid" type="submit" class="btn btn-primary">Submit</button>
+  </form> -->
