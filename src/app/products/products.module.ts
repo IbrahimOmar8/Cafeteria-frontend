@@ -8,7 +8,7 @@ import { MainComponent } from './main/main.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,11 +17,13 @@ import { EditProductComponent } from './edit-product/edit-product.component';
     MainComponent,
     AddProductComponent,
     AddCategoryComponent,
-    EditProductComponent
+    EditProductComponent,
   ],
   imports: [
     CommonModule,
-    ProductsRoutingModule
-  ]
+    ProductsRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
-export class ProductsModule { }
+export class ProductsModule {}

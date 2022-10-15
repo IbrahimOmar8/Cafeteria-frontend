@@ -26,6 +26,9 @@ export class ProductsService {
       console.log(
         `An Error occured ${err.error} msg: ${err.message} status: ${err.status}`
       );
+    alert(
+      `An Error occured ${err.error} msg: ${err.message} status: ${err.status}`
+    );
     return throwError(() => new Error('Erorr occured please try again'));
   }
   getProducts(): Observable<any> {
@@ -41,6 +44,7 @@ export class ProductsService {
       })
     );
   }
+
   updateProduct(id: number, product: Product) {
     return this.http
       .put(
@@ -48,6 +52,21 @@ export class ProductsService {
         JSON.stringify(product),
         this.httpOption
       )
+      .pipe(retry(2), catchError(this.handleErr));
+  }
+
+  addProduct(product: Product): Observable<Product> {
+    return this.http
+      .post<Product>(
+        `${environment.BasicURL}/products`,
+        JSON.stringify(product),
+        this.httpOption
+      )
+      .pipe(retry(2), catchError(this.handleErr));
+  }
+  getCategories(): Observable<any> {
+    return this.http
+      .get<any>(`${environment.BasicURL}/category`)
       .pipe(retry(2), catchError(this.handleErr));
   }
 }
