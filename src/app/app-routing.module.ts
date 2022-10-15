@@ -21,11 +21,6 @@ const routes: Routes = [
   { path: 'admin', component: BoardAdminComponent },
   { path: 'card', component: CardComponent },
   { path: 'orders', component: OrdersComponent },
-  {
-    path: 'products',
-    loadChildren: () =>
-      import('src/app/products/products.module').then((m) => m.ProductsModule),
-  },
   { path: '**', component: NotFoundComponent },
 ];
 
