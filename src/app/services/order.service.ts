@@ -2,7 +2,8 @@ import { HttpClient, HttpHeaders , HttpErrorResponse } from '@angular/common/htt
 import { Injectable } from '@angular/core';
 import { catchError, Observable, retry, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Order } from '../order';
+import { Iorder } from '../interface/iorder';
+
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -13,6 +14,8 @@ const httpOptions = {
 })
 export class OrderService {
   httpOption:any;
+
+ objOrder : Iorder = {} as Iorder;
 
   constructor(
     private HttpClient : HttpClient
@@ -34,21 +37,16 @@ export class OrderService {
   }
 
    getAllOrders(): Observable<any>{
-      return this.HttpClient.get<Order[]>(`${environment.BasicURL}order`)
+      return this.HttpClient.get<Iorder[]>(`${environment.BasicURL}order`)
       .pipe(
         retry(2),
         catchError(this.handleError)
         )
-
   }
 
 
-
-
-
-
-  getOrderById(orderID: string): Observable<Order>{
-    return this.HttpClient.get<Order>(`${environment.BasicURL}orders/${orderID}`)
+  getOrderById(orderID: string): Observable<Iorder>{
+    return this.HttpClient.get<Iorder>(`${environment.BasicURL}orders/${orderID}`)
     .pipe(
       retry(2),
       catchError(this.handleError)
@@ -70,8 +68,8 @@ export class OrderService {
 
   }
 
-  addOrder(newOrder:Order) : Observable<Order>{
-    return this.HttpClient.post<Order>(`${environment.BasicURL}orders`,
+  addOrder(newOrder:Iorder) : Observable<Iorder>{
+    return this.HttpClient.post<Iorder>(`${environment.BasicURL}orders`,
      JSON.stringify(newOrder),httpOptions)
     .pipe(
       retry(2),
@@ -79,8 +77,8 @@ export class OrderService {
       )}
 
   // updateOrder(id: string,newOrder:Order) : Observable<Order>{
-    updateOrder(id: string,newOrder:any) : Observable<Order>{
-    return this.HttpClient.put<Order>(`${environment.BasicURL}orders/`+id,
+    updateOrder(id: string,newOrder:any) : Observable<Iorder>{
+    return this.HttpClient.put<Iorder>(`${environment.BasicURL}orders/`+id,
      JSON.stringify(newOrder))
     .pipe(
       retry(2),
