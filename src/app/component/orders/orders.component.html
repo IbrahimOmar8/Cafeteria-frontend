@@ -1,4 +1,11 @@
 <h1 class="title">Orders</h1>
 <div class="line"></div>
 
-<app-card [content]="cardContent"></app-card>
+<div class="orders-container"  *ngFor="let item of orderList">
+<button (click)="onEdite(item._id)">edit</button>
+    <app-card [content]="cardContent" [ord]="orderList" ></app-card>
+<form #orderForm="ngForm">
+    <input name="action" type="text" class="form-control" placeholder="action" ngModel>
+    <input type="submit" value="{{editMode ? 'update order' : 'add order'}}"v (click)="onDone(item.action)">
+</form>
+</div>

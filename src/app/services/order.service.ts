@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders , HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, retry, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Order } from '../order';
 
@@ -22,17 +22,43 @@ export class OrderService {
 
    }
 
-   getAllOrders(): Observable<Order[]>{
-      return this.HttpClient.get<Order[]>(`${environment.BasicURL}orders`);
 
+   private handleError(error: HttpErrorResponse){
+    if(error.status === 0){
+      console.error('an error ocuured: ', error.error)
+
+    }else{
+      console.error(`Backend returned code ${error.status}, body was: `, error.error)
+    }
+    return throwError(
+      ()=> new Error('error occured, please try again. ')
+    )
+  }
+
+   getAllOrders(): Observable<Order[]>{
+      return this.HttpClient.get<Order[]>(`${environment.BasicURL}order`)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+        )
 
   }
 
+
+
+
+
+
   getOrderById(orderID: number): Observable<Order>{
-    return this.HttpClient.get<Order>(`${environment.BasicURL}orders/${orderID}`);
+    return this.HttpClient.get<Order>(`${environment.BasicURL}orders/${orderID}`)
+    .pipe(
+      retry(2),
+      catchError(this.handleError)
+      )
 
 
 }
+
 
   getOrdersByDate(){
 
@@ -42,16 +68,27 @@ export class OrderService {
 
   }
 
-  addOrder(newOrder:Order) {
-    return this.HttpClient.post<Order>(`${environment.BasicURL}orders`, JSON.stringify(newOrder));
+  addOrder(newOrder:Order) : Observable<Order>{
+    return this.HttpClient.post<Order>(`${environment.BasicURL}orders`,
+     JSON.stringify(newOrder))
+    .pipe(
+      retry(2),
+      catchError(this.handleError)
+      )
 
   }
 
-  updateOrder() {
-
+  // updateOrder(id: string,newOrder:Order) : Observable<Order>{
+    updateOrder(id: string,newOrder:any) : Observable<Order>{
+    return this.HttpClient.put<Order>(`${environment.BasicURL}orders/`+id,
+     JSON.stringify(newOrder))
+    .pipe(
+      retry(2),
+      catchError(this.handleError)
+      )
   }
 
-  deleteOrder() {
+  deleteOrder(id:any) {
 
   }
 }

@@ -18,6 +18,7 @@ import { RegisterComponent } from './component/register/register.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { BoardAdminComponent } from './component/board-admin/board-admin.component';
 import { BoardUserComponent } from './component/board-user/board-user.component';
+import { EditOrderComponent } from './component/edit-order/edit-order.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { BoardUserComponent } from './component/board-user/board-user.component'
     HomeComponent,
     ProfileComponent,
     BoardAdminComponent,
-    BoardUserComponent
+    BoardUserComponent,
+    EditOrderComponent
   ],
   imports: [
     BrowserModule,
