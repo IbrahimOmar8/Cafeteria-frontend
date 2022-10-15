@@ -1,8 +1,13 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders , HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, retry, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Order } from '../order';
+import { Iorder } from '../interface/iorder';
+
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -10,48 +15,81 @@ import { Order } from '../order';
 export class OrderService {
   httpOption:any;
 
+ objOrder : Iorder = {} as Iorder;
+
   constructor(
     private HttpClient : HttpClient
   ) {
-    this.httpOption={
-      headers: new HttpHeaders({
-        'Content-Type' : 'application/json'
-      //  ,Authorization: 'my-auth-token'
-      })
-    }
 
    }
 
-   getAllOrders(): Observable<Order[]>{
-      return this.HttpClient.get<Order[]>(`${environment.BasicURL}orders`);
 
+   private handleError(error: HttpErrorResponse){
+    if(error.status === 0){
+      console.error('an error ocuured: ', error.error)
 
+    }else{
+      console.error(`Backend returned code ${error.status}, body was: `, error.error)
+    }
+    return throwError(
+      ()=> new Error('error occured, please try again. ')
+    )
   }
 
-  getOrderById(orderID: number): Observable<Order>{
-    return this.HttpClient.get<Order>(`${environment.BasicURL}orders/${orderID}`);
+   getAllOrders(): Observable<any>{
+      return this.HttpClient.get<Iorder[]>(`${environment.BasicURL}order`)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+        )
+  }
+
+
+  getOrderById(orderID: string): Observable<Iorder>{
+    return this.HttpClient.get<Iorder>(`${environment.BasicURL}orders/${orderID}`)
+    .pipe(
+      retry(2),
+      catchError(this.handleError)
+      )
 
 
 }
 
-  getOrdersByDate(){
 
+  getOrdersByDate(startDate:any, endDate:any){
+    return this.HttpClient.get<Iorder>(`${environment.BasicURL}orders/?startDate=${startDate}&endDate=${endDate}`)
+    .pipe(
+      retry(2),
+      catchError(this.handleError)
+      )
   }
 
   getOrdersByUserName(){
 
   }
 
-  addOrder(newOrder:Order) {
-    return this.HttpClient.post<Order>(`${environment.BasicURL}orders`, JSON.stringify(newOrder));
+  addOrder(newOrder:Iorder) : Observable<Iorder>{
+    return this.HttpClient.post<Iorder>(`${environment.BasicURL}orders`,
+     JSON.stringify(newOrder),httpOptions)
+    .pipe(
+      retry(2),
+      catchError(this.handleError)
+      )}
 
-  }
+  // updateOrder(id: string,newOrder:Order) : Observable<Order>{
+    updateOrder(id: string,newOrder:any) : Observable<Iorder>{
+    return this.HttpClient.put<Iorder>(`${environment.BasicURL}orders/`+id,
+     JSON.stringify(newOrder))
+    .pipe(
+      retry(2),
+      catchError(this.handleError)
+      ) }
 
-  updateOrder() {
-
-  }
-
-  deleteOrder() {
-
+  deleteOrder(id:any) {
+    return this.HttpClient.delete(`${environment.BasicURL}orders/${id}`)
+    .pipe(
+      retry(2),
+      catchError(this.handleError)
+      )
   }
 }

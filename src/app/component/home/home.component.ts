@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
+import { Iorder } from 'src/app/interface/iorder';
+import { Iprodcut } from 'src/app/interface/iprodcut';
+import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'app-home',
@@ -10,38 +13,37 @@ import { UserService } from '../../services/user.service';
 export class HomeComponent implements OnInit {
   content?: string;
   OutPutTestAPI :String = "";
+  orderList : Iorder[] =  [];
+
+  producOrdereList : Iprodcut [] = []
+
+   OrderSelct :string ="[0]" ;
+
   constructor(private userService: UserService,
-    private authService:AuthService) { }
+    private authService:AuthService ,
+    private orderService :OrderService) { }
 
   ngOnInit(): void {
-    this.userService.getPublicContent().subscribe({
-      next: data => {
-        this.content = data;
-      },
-      error: err => {console.log(err)
-        if (err.error) {
-          this.content = JSON.parse(err.error).message;
-        } else {
-          this.content = "Error with status: " + err.status;
-        }
-      }
-    });
-
-
-
-
+        this.orderService.getAllOrders().subscribe((data: any) => {
+          this.orderList = data;
+        this.producOrdereList =  this.orderList[0].Prodeuct;          
+        });
   }
 
 
-  Testapi(){
+  ShowProduct(orderID :string){
+    this.OrderSelct = orderID ;     
+    const orderSelct = this.orderList.filter( (obj) =>
+    obj._id == orderID
+    )
 
-  
-  // this.authService.TestCallAPI().subscribe({
-  //   next: data => {
-  //     this.OutPutTestAPI  = JSON.stringify(data);
-  //     //console.log(data);      
-  //   }    
-  // });
-  }
+      console.log(orderSelct);
+      
+    
+    this.producOrdereList = orderSelct[0].Prodeuct
+
+    //console.log(this.producOrdereList);
+
+   }
 
 }
