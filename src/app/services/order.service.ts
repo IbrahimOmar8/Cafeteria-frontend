@@ -4,6 +4,10 @@ import { catchError, Observable, retry, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Order } from '../order';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,12 +17,6 @@ export class OrderService {
   constructor(
     private HttpClient : HttpClient
   ) {
-    this.httpOption={
-      headers: new HttpHeaders({
-        'Content-Type' : 'application/json'
-      //  ,Authorization: 'my-auth-token'
-      })
-    }
 
    }
 
@@ -35,7 +33,7 @@ export class OrderService {
     )
   }
 
-   getAllOrders(): Observable<Order[]>{
+   getAllOrders(): Observable<any>{
       return this.HttpClient.get<Order[]>(`${environment.BasicURL}order`)
       .pipe(
         retry(2),
@@ -49,7 +47,7 @@ export class OrderService {
 
 
 
-  getOrderById(orderID: number): Observable<Order>{
+  getOrderById(orderID: string): Observable<Order>{
     return this.HttpClient.get<Order>(`${environment.BasicURL}orders/${orderID}`)
     .pipe(
       retry(2),
@@ -70,13 +68,11 @@ export class OrderService {
 
   addOrder(newOrder:Order) : Observable<Order>{
     return this.HttpClient.post<Order>(`${environment.BasicURL}orders`,
-     JSON.stringify(newOrder))
+     JSON.stringify(newOrder),httpOptions)
     .pipe(
       retry(2),
       catchError(this.handleError)
-      )
-
-  }
+      )}
 
   // updateOrder(id: string,newOrder:Order) : Observable<Order>{
     updateOrder(id: string,newOrder:any) : Observable<Order>{
@@ -85,10 +81,13 @@ export class OrderService {
     .pipe(
       retry(2),
       catchError(this.handleError)
-      )
-  }
+      ) }
 
   deleteOrder(id:any) {
-
+    return this.HttpClient.delete(`${environment.BasicURL}orders/${id}`)
+    .pipe(
+      retry(2),
+      catchError(this.handleError)
+      )
   }
 }

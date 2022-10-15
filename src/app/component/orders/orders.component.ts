@@ -1,4 +1,5 @@
 import { Component, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Order } from 'src/app/order';
 import { OrderService } from 'src/app/services/order.service';
 
@@ -9,89 +10,82 @@ import { OrderService } from 'src/app/services/order.service';
 })
 export class OrdersComponent implements OnInit, OnChanges {
 
+
   orderList: Order[] =[];
-  cardContent: any
-  myList: any;
+
+
+  
+  newOrd:any = {
+    _id:'',
+    user: '',
+    date:new Date(),
+    status:'',
+    amount:0,
+    action:'',    
+      room:0,
+    ext:0
+         
+  };
+
+
   editMode: boolean =false;
   currentOrderId: string =''
 @ViewChild('orderForm') form: any
-  constructor(private orderServ: OrderService) {
-this.myList =[]
-    this.cardContent = {
-      date: '',
-      user: '',
-      room: 0,
-      ext: 0,
-      action: ''
-    }
 
-   
-  }
+
+
+
+  constructor(
+    private orderServ: OrderService,
+    private router : Router
+    ) { 
+     }
 
   ngOnInit(): void {
-
-
-    this.orderServ.getAllOrders().subscribe(
-    {next:  orders => {
-        this.orderList = orders
-        console.log("order: " + orders)
-        // console.log("next: " + next)
-      }
-
-      }
-      )
+    this.orderServ.getAllOrders().subscribe((data: any) => {
+      this.orderList = data;
+      console.log(data);
+    });
+  // }
 
 
 
-    //  if(this.orderList) {
-    // this.ordersList= this.orderList.map((item:any) => {
-    //     console.log('item: '+ item)
-    //    return this.cardContent= {
-    //     date: item.date,
-    //     user: item.user.username,
-    //     room: item.room,
-    //     ext: item.ext,
-    //     action: item.action
-    //    }
-    //   })
-    // }
+   
 
 
   }
 
   ngOnChanges() {
-      // this.orderServ.updateOrder().subscribe(
+  }
 
-      // )
 
-      
-    if(this.orderList) {
-      this.orderList.map((item:any)=> {
-        this.myList.push(item)
+  addnewOrder() {
+    this.orderServ.addOrder(this.newOrd).subscribe((data: any) => {
+      this.orderList.push(data)
+      console.log(data);
+      console.log(this.newOrd)
+    }) 
+console.log(this.newOrd)
+  }
   
-            })
-            console.log(this.myList)
-          }
 
+  onDelete(id:string, order: any){
+    const observer = {
+      next: () => {
+        console.log('removed succesfully');
+        this.orderServ.getAllOrders().subscribe((data: any) => {
+          this.orderList = data;
+        });
+      },
+      error: (err: Error) => alert(err.message),
+    };
+    this.orderServ.deleteOrder(id).subscribe(observer);
   }
-  onDelete(id:string){
-this.orderServ.deleteOrder(id)
-  }
 
-  onEdite(id:string){
 
-    console.log(this.orderList)
-    // this.currentOrderId = id
-//     let thisOrder = this.orderList.find((order:any) =>{
-//       return order.id === id
-//     })
-// console.log(thisOrder)
 
-// this.form.setValue({
-//   action: thisOrder.action
-// })
 
-// this.editMode= true
+  onEdite( id:string ){
   }
 
   onDone(action:string){

@@ -1,11 +1,72 @@
 <h1 class="title">Orders</h1>
 <div class="line"></div>
 
-<div class="orders-container"  *ngFor="let item of orderList">
+
+ 
+<div>
+    <div>
+      <label>action: </label>
+      <input [(ngModel)]="newOrd.action" />
+    </div>      {{newOrd.action}}
+
+    <div>
+        <label>room: </label>
+        <input [(ngModel)]="newOrd.room" />
+      </div>      {{newOrd.room}}
+
+      <div>
+        <label>id: </label>
+        <input [(ngModel)]="newOrd._id" />
+      </div> 
+      {{newOrd._id}}
+      <div>
+        <label>ext: </label>
+        <input [(ngModel)]="newOrd.ext" />
+      </div> 
+      {{newOrd.ext}}
+      <div>
+        <label>status: </label>
+        <input [(ngModel)]="newOrd.status" />
+      </div>       {{newOrd.status}}
+      <div>
+        <label>amount: </label>
+        <input [(ngModel)]="newOrd.amount" />      {{newOrd.amount}}
+
+      </div>
+    <div>
+      <button (click)="addnewOrder()">Add </button>
+    </div>
+  </div>
+
+<div class="orders-container mb-2"  *ngFor="let item of orderList">
 <button (click)="onEdite(item._id)">edit</button>
-    <app-card [content]="cardContent" [ord]="orderList" ></app-card>
-<form #orderForm="ngForm">
-    <input name="action" type="text" class="form-control" placeholder="action" ngModel>
-    <input type="submit" value="{{editMode ? 'update order' : 'add order'}}"v (click)="onDone(item.action)">
-</form>
+<button class="close-btn me-1" (click)="onDelete(item._id , item)"><i class="fa-solid fa-trash"
+    style="color: red;"></i></button>
+
+
+<div class="card mb-3 prod-car" style="max-width: 540px; border: none">
+    <div class="row row-cols-2 g-0 d-flex w-100">
+      <div class="col-4 p-1 ">
+        <img src="https://img.freepik.com/premium-photo/cup-coffee-oriental-style-metal-tray_93675-107319.jpg?size=626&ext=jpg&ga=GA1.2.1932154363.1665712397" class="img-fluid rounded-circle h-100" alt="...">
+      </div>
+      <div class="col-8">
+        <div class="card-body position-relative card-content">
+          <h5 class="card-title">date: {{item?.date}}</h5>
+          <p class="card-text">user: <small >{{item?.user.username}}</small></p>
+          <p class="card-text">room: <small >{{item?.room}}</small></p>
+          <p class="card-text">ext: <small >{{item?.ext}}</small></p>
+          <p class="card-text">action: <small >{{item?.action}}</small></p>
+          <p class="card-text position-absolute bottom-0 end-0">price: <small >{{item?.amount}} <sup>$</sup></small></p>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+    <!-- <app-card [content]="cardContent" [ord]="orderList" ></app-card> -->
+
+
 </div>
