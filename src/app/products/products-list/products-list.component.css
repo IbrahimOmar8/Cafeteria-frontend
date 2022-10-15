@@ -1,0 +1,10 @@
+.close-btn {
+  border: none;
+  background: none;
+  font-size: 18px;
+}
+
+.qty-input {
+  width: 60px;
+  border-radius: 10px;
+}

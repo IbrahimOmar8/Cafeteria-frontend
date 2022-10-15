@@ -19,14 +19,13 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'user', component: BoardUserComponent },
   { path: 'admin', component: BoardAdminComponent },
-  {path:"card", component: CardComponent},
-  {path: "orders",component:OrdersComponent},
-  {path:"**", component: NotFoundComponent}
-
+  { path: 'card', component: CardComponent },
+  { path: 'orders', component: OrdersComponent },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
