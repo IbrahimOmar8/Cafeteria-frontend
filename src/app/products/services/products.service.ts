@@ -13,6 +13,7 @@ import { environment } from '../../../environments/environment.prod';
 })
 export class ProductsService {
   httpOption;
+  products:Product[]=[]
   constructor(private http: HttpClient) {
     this.httpOption = {
       headers: new HttpHeaders({
@@ -49,5 +50,9 @@ export class ProductsService {
         this.httpOption
       )
       .pipe(retry(2), catchError(this.handleErr));
+  }
+
+  onChangeProd(product:Product[]){
+  return  this.products = product
   }
 }

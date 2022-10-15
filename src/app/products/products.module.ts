@@ -8,6 +8,7 @@ import { MainComponent } from './main/main.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
+import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { EditProductComponent } from './edit-product/edit-product.component';
     MainComponent,
     AddProductComponent,
     AddCategoryComponent,
-    EditProductComponent
+    EditProductComponent,
+    AdminProfileComponent
   ],
   imports: [
     CommonModule,
