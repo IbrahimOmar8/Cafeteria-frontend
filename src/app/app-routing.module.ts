@@ -23,6 +23,11 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'card', component: CardComponent },
   { path: 'orders', component: OrdersComponent },
+  {
+    path: 'products',
+    loadChildren: () =>
+      import('./products/products.module').then((m) => m.ProductsModule),
+  },
   {path: 'order/add',component:AddOrderComponent} ,
   { path: 'orders/edit', component: EditOrderComponent, pathMatch: 'full' },
   { path: 'adminprofile', component: AdminProfileComponent },

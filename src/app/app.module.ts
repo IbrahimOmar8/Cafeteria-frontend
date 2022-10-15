@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -33,6 +33,8 @@ import { AddOrderComponent } from './component/add-order/add-order.component';
     RegisterComponent,
     HomeComponent,
     ProfileComponent,
+    BoardAdminComponent,
+    BoardUserComponent,
     EditOrderComponent,
     AddOrderComponent
   ],
@@ -42,9 +44,10 @@ import { AddOrderComponent } from './component/add-order/add-order.component';
     HttpClientModule,
     FontAwesomeModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
