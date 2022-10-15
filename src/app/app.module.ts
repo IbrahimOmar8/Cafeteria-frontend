@@ -33,8 +33,6 @@ import { AddOrderComponent } from './component/add-order/add-order.component';
     RegisterComponent,
     HomeComponent,
     ProfileComponent,
-    BoardAdminComponent,
-    BoardUserComponent,
     EditOrderComponent,
     AddOrderComponent
   ],
