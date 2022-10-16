@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faHome, faMugHot, faUserAlt } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faMugHot, faUserAlt, faReceipt, faPlus, faRectangleList, faRightToBracket, faUserPlus, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/services/auth.service';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -21,6 +21,14 @@ export class NavbarComponent implements OnInit {
   faHome = faHome;
   faCube =faMugHot;
   user=faUserAlt
+  faReceipt=faReceipt
+  faPlus =faPlus
+  faSchoolCircleExclamation=faRectangleList
+  faRightToBracket=faRightToBracket
+  faUserPlus=faUserPlus
+  faRightFromBracket=faRightFromBracket
+
+
 
   constructor(private storageService: StorageService, private authService: AuthService) { }
 

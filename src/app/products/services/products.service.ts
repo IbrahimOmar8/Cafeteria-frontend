@@ -69,6 +69,10 @@ export class ProductsService {
     return this.http
       .get<any>(`${environment.BasicURL}/category`)
       .pipe(retry(2), catchError(this.handleErr));
+<<<<<<< HEAD
+
+=======
+>>>>>>> fcdb4e4e30958e6498e081bd104e5c02f64c7a53
   }
   onChangeProd(product:Product[]){
   return  this.products = product

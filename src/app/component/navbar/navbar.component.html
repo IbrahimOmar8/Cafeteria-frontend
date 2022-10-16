@@ -8,48 +8,76 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav w-100">
         <li class="nav-item wdth ">
-          <a class="nav-link " [routerLink]="['/home']" routerLinkActive="active" aria-current="page">
+          <a class="nav-link " [routerLink]="['/home']" routerLinkActive="active" aria-current="page" title="home">
             <fa-icon [icon]="faHome" class="fs-3  icons"></fa-icon>
           </a>
         </li>
+
         <li class="nav-item wdth ">
-          <a class="nav-link"  [routerLink]="['/orders']" routerLinkActive="active" >
-            <fa-icon [icon]="faCube" class="fs-3 icons"></fa-icon>
+          <a class="nav-link"  [routerLink]="['/orders']" routerLinkActive="active"  title="orders">
+            <fa-icon [icon]="faReceipt" class="fs-3 icons"></fa-icon>
           </a>
         </li>
+
         <li class="nav-item wdth ">
-          <a class="nav-link" [routerLink]="['/profile']" routerLinkActive="active">
+          <a class="nav-link"  [routerLink]="['/order/add']" routerLinkActive="active"  title="add new order">
+            <fa-icon [icon]="faReceipt" class="fs-3 icons"></fa-icon>
+            <fa-icon [icon]="faPlus " class="fs-4 icons"></fa-icon>
+          </a>
+        </li>
+
+        <li class="nav-item wdth ">
+          <a class="nav-link" [routerLink]="['/profile']" routerLinkActive="active" title="my profile">
             <fa-icon [icon]="user" class="fs-3 icons"></fa-icon>
           </a>
         </li>
+
         <li class="nav-item wdth ">
-          <a href class="nav-link" routerLink="products">Products</a>
+          <a href class="nav-link" routerLink="products" title="products">
+            <fa-icon [icon]="faCube" class="fs-3 icons"></fa-icon>
+            </a>
         </li>
+        
         <li class="nav-item wdth ">
-          <a href class="nav-link" routerLink="products/add/category">Add category</a>
+          <a href class="nav-link" routerLink="products/add" title="add new product">
+            <fa-icon [icon]="faCube" class="fs-3 icons"></fa-icon>
+            <fa-icon [icon]="faPlus " class="fs-5 icons"></fa-icon>
+          </a>
         </li>
+
         <li class="nav-item wdth ">
-          <a href class="nav-link" routerLink="products/add">Add product</a>
+          <a href class="nav-link" routerLink="products/add/category" title="add new category">
+            <fa-icon [icon]="faSchoolCircleExclamation" class="fs-3 icons"></fa-icon>
+            <fa-icon [icon]="faPlus " class="fs-5 icons"></fa-icon>
+          </a>
         </li>
+
       </ul>
       <ul class="navbar-nav ml-auto" *ngIf="IsAdmin">
         <li class="nav-item">
-          <a href="/register" class="nav-link" routerLink="register">Add User</a>
+          <a href="/register" class="nav-link" routerLink="register" title="add new user">
+            <fa-icon [icon]="faUserPlus" class="fs-3 icons"></fa-icon>
+          </a>
         </li>
       </ul>
       <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
 
         <li class="nav-item">
-          <a href="/login" class="nav-link" routerLink="login">Login</a>
+          <a href="/login" class="nav-link" routerLink="login" title="login">
+            <fa-icon [icon]="faRightToBracket" class="fs-3 icons"></fa-icon>
+          </a>
         </li>
       </ul>
 
       <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
         <li class="nav-item">
-          <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
+          <a href="/profile" class="nav-link" routerLink="profile" title="">{{ username }}</a>
         </li>
         <li class="nav-item">
-          <a href class="nav-link" (click)="logout()">LogOut</a>
+          <a href class="nav-link" (click)="logout()" title="loggout">
+            <fa-icon [icon]="faRightFromBracket" class="fs-3 icons"></fa-icon>
+
+          </a>
         </li>
 
       </ul>
