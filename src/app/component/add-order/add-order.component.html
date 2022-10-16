@@ -3,8 +3,12 @@
 
         <div class="card" style="width: 35rem;">
             <div class="card-body">
-                <form #myForm="ngForm" (ngSubmit)="addOrder()">
-                    <!-- repeate by product number -->
+                    <form                   
+                    name="form"
+                    (ngSubmit)="onSubmit()"
+                    #f="ngForm"
+                    novalidate
+                    >
                     <div class="mb-3">
                         <label for="prdName" class="form-label"> product </label>
                         <table class="table table-hover">
@@ -22,8 +26,9 @@
                                     <td> {{prod._id}} </td>
                                     <td> {{prod.name}} </td>
                                     <td> {{prod.price}} </td>
-                                    <td>{{prod.img}}</td>
-
+                                    <!-- <td>{{prod.img}}</td> -->
+                                     <td><img src="../../../assets/coffee-icon-coffee-cup-flat-icon.png" width="96" height="96" > 
+                                    </td>
 
 
                                     <td> <button class="btn btn-warning" (click)="FunRemove(prod._id)">
@@ -36,25 +41,43 @@
 
                     <div class="mb-3">
                         <label for="note" class="form-label">status : </label>
-                        <input type="text" class="form-control"  [(ngModel)]="MyOrder.status">
+                        <input type="text" class="form-control"   
+                        [(ngModel)]="MyOrder.status" #inpStauts="ngModel" 
+                        name="status"
+                        required
+                        minlength="3"
+                        maxlength="20"
+                        value="done"
+                        [ngClass]="{ 'is-invalid':  inpStauts.errors }">
                     </div>
 
                     <div class="mb-3">
                         <label for="room" class="form-label">Room: </label>
-                        <input type="number" class="form-control"  [(ngModel)]="MyOrder.room">
+                        <input type="number" class="form-control" 
+                        [(ngModel)]="MyOrder.room" #inproom="ngModel" 
+                        name="room"
+                        value="1"
+                        [ngClass]="{ 'is-invalid':  inproom.errors }"/>
                     </div>
 
                     <div class="mb-3">
                         <label for="action" class="form-label">Action: </label>
-                        <input type="text" class="form-control"  [(ngModel)]="MyOrder.action">
+                        <input type="text" class="form-control" 
+                        [(ngModel)]="MyOrder.action" #inpaction="ngModel" 
+                        name="action"
+                        value="done"
+                        [ngClass]="{ 'is-invalid':  inpaction.errors }"/>
                     </div>
 
                     <div class="mb-3">
                         <label for="amount" class="form-label">Total Price: </label>
-                        <input type="text" class="form-control"   [(ngModel)]="MyOrder.amount">
+                        <input type="text" class="form-control" 
+                        [(ngModel)]="MyOrder.amount" #inpamount="ngModel" 
+                        name="amount"
+                        [ngClass]="{ 'is-invalid':  inpamount.errors }"/>
                     </div>
 
-                    <button type="submit" [disabled]="myForm.invalid" class="btn btn-primary">Submit</button>
+                    <button type="submit"  class="btn btn-primary">Submit</button>
                 </form>
 
             </div>

@@ -1,7 +1,10 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router, TitleStrategy } from '@angular/router';
+import { IOrderForAdd } from 'src/app/interface/i-order-for-add';
 import { Iorder } from 'src/app/interface/iorder';
 import { Iprodcut } from 'src/app/interface/iprodcut';
+import { Iuser } from 'src/app/interface/iuser';
 import { Order } from 'src/app/order';
 import { Product } from 'src/app/products/interfaces/product';
 import { ProductsService } from 'src/app/products/services/products.service';
@@ -20,7 +23,7 @@ export class AddOrderComponent implements OnInit {
   isLoggedIn = false;
   IsAdmin = false;
   IsUser = false;
-  UserID?: string;
+  user : Iuser = {} as Iuser ;
 
   orderList:Iorder[] = []
   startDate:Date =new Date()
@@ -29,6 +32,7 @@ export class AddOrderComponent implements OnInit {
   MyOrder :Iorder ={} as Iorder ;
   products: Iprodcut[] = [];
   Orderproducts: Iprodcut[] = [];
+  objOrderForAdd :IOrderForAdd = {} as IOrderForAdd;
 
   constructor( private productsService: ProductsService,
     private orderServ: OrderService ,
@@ -39,41 +43,33 @@ export class AddOrderComponent implements OnInit {
      }
 
   ngOnInit(): void {
-    this.isLoggedIn = this.storageService.isLoggedIn();
-
-   if (this.isLoggedIn) {
-        const user = this.storageService.getUser();
-        this.roles = user.roles;
-
-        this.IsAdmin = this.roles.includes('ROLE_ADMIN');
-        this.IsUser = this.roles.includes('ROLE_USER');
-
-        this.UserID = `${user._id}` ;
-      }
-
-
-    //  this.orderServ.getOrdersByDate(this.startDate, this.endDate).subscribe((data: any) => {
-    //    this.orderList = data;
-    //    console.log(data);
-    //  });
 
     this.productsService.getProducts().subscribe((data: any) => {
       this.products = data;
-      console.log(data);
-       this.productsService.onChangeProd(data)
-      console.log( "p :  "+this.productsService.products) 
-
     });
+
+     this.isLoggedIn = this.storageService.isLoggedIn();
+
+   if (this.isLoggedIn) {
+        this.user = this.storageService.getUser();
+        this.roles = this.user.roles;
+        this.IsAdmin = this.roles.includes('ROLE_ADMIN');
+        this.IsUser = this.roles.includes('ROLE_USER');
+      }
+    //  this.orderServ.getOrdersByDate(this.startDate, this.endDate).subscribe((data: any) => {
+    //    this.orderList = data;
+    //    console.log(data);
+    //  }); 
 
   }
 
   addProdcut(prod : Product){
-    console.log(prod);
+  //  console.log(prod);
     let isFrist = true ;
     this.Orderproducts.forEach(element => {
         if(element._id == prod._id)
         {
-          element.price += prod.price
+          element.size += 1;
           isFrist = false ;
         }
     });
@@ -81,9 +77,13 @@ export class AddOrderComponent implements OnInit {
     if(isFrist)
     {
       this.Orderproducts.push(prod)
+      this.MyOrder.amount = 0;
     }
    
    this.MyOrder.Prodeuct = this.Orderproducts ;
+   //console.log(prod.price);
+   //console.log(this.MyOrder.amount);
+   
    this.MyOrder.amount += prod.price ;    
   }
 
@@ -94,22 +94,48 @@ export class AddOrderComponent implements OnInit {
     )
     this.Orderproducts = this.MyOrder.Prodeuct
   }
+  
+  FunMapingObj() :void{
 
-addOrder(){
- console.log(this.MyOrder)
+    this.objOrderForAdd.action = this.MyOrder.action ;
+    this.objOrderForAdd.amount = this.MyOrder.amount ;
+    this.objOrderForAdd.room = this.MyOrder.room ;
+    this.objOrderForAdd.status = this.MyOrder.status ;
+    this.objOrderForAdd.ext = 1;
+    this.objOrderForAdd.user = this.user.id  ;
+    
+    this.MyOrder.Prodeuct.forEach(element => {
+      this.objOrderForAdd.Prodeuct = element._id
+    });
+    
+    }
+    
+
+onSubmit():void {  
+
+  if(!this.isLoggedIn)
+  {
+    alert("your not login")
+    this.route.navigateByUrl('/login')  
+    return
+  }
+  this.FunMapingObj() ;
+
+
+
+  console.log(this.objOrderForAdd);
+  
+
   const observer = {
     next: (prd: Iorder) => {
       alert("added succesfully")
-      this.route.navigateByUrl('/home')
-      
+      this.route.navigateByUrl('/home')      
     },
     error: (err: Error)=> {alert(err.message)}
   }
-
-  this.orderServ.addOrder(this.MyOrder).subscribe(observer)
-
-
+   this.orderServ.addOrder(this.objOrderForAdd).subscribe(observer)
 }
+
 
 }
 
