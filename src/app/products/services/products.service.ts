@@ -69,6 +69,7 @@ export class ProductsService {
     return this.http
       .get<any>(`${environment.BasicURL}/category`)
       .pipe(retry(2), catchError(this.handleErr));
+  }
   onChangeProd(product:Product[]){
   return  this.products = product
   }
