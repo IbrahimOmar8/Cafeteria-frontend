@@ -2,52 +2,70 @@
   <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
     <div class="card-body p-4 p-md-5">
       <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Product Details</h3>
-      <!-- <form #myForm="ngForm" [formGroup]="LoginForm" (ngSubmit)="loggin()"> -->
-      <form>
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
         <div class="row">
           <div class="col-md-12 mb-2 pb-1">
             <div class="form-outline">
               <label class="form-label" for="name">Name</label>
-              <input type="text" id="name" class="form-control form-control-lg" formControlName="text" />
+              <input type="text" id="name" class="form-control form-control-lg" formControlName="name" />
+            </div>
+            <div
+              *ngIf="productForm.controls['name'].invalid && (productForm.controls['name'].dirty || productForm.controls['name'].touched)"
+              class="alert alert-danger">
+              Name is required minimum 4 characters
             </div>
           </div>
           <div class="col-md-12 mb-2 pb-1">
             <div class="form-outline">
               <label class="form-label" for="price">Price</label>
-              <input type="number" value="1" id="price" class="form-control form-control-lg">
+              <input type="number" value="1" id="price" formControlName="price" class="form-control form-control-lg">
 
             </div>
+
+            <div
+              *ngIf="productForm.controls['price'].invalid && (productForm.controls['price'].dirty || productForm.controls['price'].touched)"
+              class="alert alert-danger">
+              Product price is required </div>
           </div>
           <div class="row">
             <div class="col-4 mb-2 pb-1">
               <label for="inputState" class="form-label">Category</label>
-              <select id="inputState" class="form-select">
+              <select id="inputState" class="form-select" formControlName="category" (change)="changeCategory($event)">
                 <option selected>Choose...</option>
-                <option>...</option>
+                <option>all</option>
               </select>
+              <!-- <option *ngFor="let city of City" [ngValue]="city">
+                {{ city }}
+              </option> -->
+
             </div>
+
             <div class="col-8">
               <div class="row">
-                <div class="col-3">
-                  <label class="form-label" for="addcat"> New Category</label>
-                  <input type="text" id="addcat" class="form-control form-control" />
-                </div>
                 <div class="col-9 pt-3 mt-3">
                   <a routerLink="category" class="btn btn-info text-white">Add Category</a>
                 </div>
               </div>
 
             </div>
+            <div
+              *ngIf="productForm.controls['category'].invalid && (productForm.controls['category'].dirty || productForm.controls['category'].touched)"
+              class="alert alert-danger">
+              Select product category or add a new category
+            </div>
           </div>
         </div>
         <div class="col-md-12 mb-2 pb-1">
           <label class="form-label" for="customFile">Image</label>
-          <input type="file" class="form-control" id="customFile" />
+          <input type="file" class="form-control" id="customFile" formControlName="img"
+            (change)="onImagePicked($event)" />
         </div>
+
         <div class="mt-4 pt-2 d-flex justify-content-center">
-          <input class="btn btn-primary btn-lg" type="submit" value="Save" />
+          <input class="btn btn-primary btn-lg" type="submit" [disabled]="!productForm.valid" value="Save" />
           <input class="btn btn-danger btn-lg ms-2" type="reset" value="Reset" />
         </div>
+
       </form>
     </div>
   </div>

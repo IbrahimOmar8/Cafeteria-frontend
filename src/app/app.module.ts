@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,13 +16,8 @@ import { NotFoundComponent } from './component/not-found/not-found.component';
 import { LoginComponent } from './component/login/login.component';
 import { RegisterComponent } from './component/register/register.component';
 import { ProfileComponent } from './component/profile/profile.component';
-import { BoardAdminComponent } from './component/board-admin/board-admin.component';
-import { BoardUserComponent } from './component/board-user/board-user.component';
 import { EditOrderComponent } from './component/edit-order/edit-order.component';
-
 import { AddOrderComponent } from './component/add-order/add-order.component';
-
-import { UserProfileComponent } from './component/user-profile/user-profile.component';
 
 
 @NgModule({
@@ -41,8 +36,7 @@ import { UserProfileComponent } from './component/user-profile/user-profile.comp
     BoardAdminComponent,
     BoardUserComponent,
     EditOrderComponent,
-    AddOrderComponent,
-    UserProfileComponent
+    AddOrderComponent
   ],
   imports: [
     BrowserModule,
@@ -50,9 +44,10 @@ import { UserProfileComponent } from './component/user-profile/user-profile.comp
     HttpClientModule,
     FontAwesomeModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

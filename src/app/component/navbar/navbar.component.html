@@ -18,11 +18,19 @@
           </a>
         </li>
         <li class="nav-item wdth ">
-          <a class="nav-link" [routerLink]="['/user']" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/profile']" routerLinkActive="active">
             <fa-icon [icon]="user" class="fs-3 icons"></fa-icon>
           </a>
         </li>
-
+        <li class="nav-item wdth ">
+          <a href class="nav-link" routerLink="products">Products</a>
+        </li>
+        <li class="nav-item wdth ">
+          <a href class="nav-link" routerLink="products/add/category">Add category</a>
+        </li>
+        <li class="nav-item wdth ">
+          <a href class="nav-link" routerLink="products/add">Add product</a>
+        </li>
       </ul>
       <ul class="navbar-nav ml-auto" *ngIf="IsAdmin">
         <li class="nav-item">
@@ -37,17 +45,13 @@
       </ul>
 
       <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
-
-        
-        <li class="nav-item">
-          <a href="/Testorders" class="nav-link" routerLink="Testorders">Test orders</a>
-        </li>
         <li class="nav-item">
           <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
         </li>
         <li class="nav-item">
           <a href class="nav-link" (click)="logout()">LogOut</a>
         </li>
+
       </ul>
     </div>
   </div>

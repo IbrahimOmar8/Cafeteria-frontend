@@ -5,5 +5,6 @@ export interface Product {
   size: any;
   timestamp: Date;
   category: string;
+  IsAvailable :boolean;
   _id: any;
 }

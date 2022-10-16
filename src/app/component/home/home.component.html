@@ -4,6 +4,99 @@
     </header>
 
 
-    <!-- <button (click)="Testapi()" >Test Api</button>
-     {{OutPutTestAPI}} -->
+  
+    <div>
+
+      <div class="container">
+        <header class="jumbotron">
+          <!-- <p>{{ content }}</p> -->
+    
+          
+          <h2 class="text-center text-warning"> Order  Page  </h2>
+    
+          <a class="btn btn-warning" [routerLink]="['/order/add']">  
+             Go To Create Order
+         </a> 
+         
+         
+         <div>
+             
+           </div>
+         <table class="table table-hover">
+             <thead>
+                 <tr>
+                     <td>ID</td>
+                     <td>user Name</td>  
+                     <td>date</td>
+                     <td>status</td>
+                     <td>amount</td>
+                     <td>action</td>
+                     <td>room</td>     
+                     <td> ext </td>
+                 </tr>
+             </thead>
+             <tbody>
+                
+                 <tr 
+                 *ngFor="let ord of orderList"
+                 [ngClass]="{'bg-danger': ord.amount == 0  }"
+                 [ngClass]="{'bg-warning':  this.OrderSelct  == ord._id }"
+                 >
+                     <td> {{ord._id}}    </td>
+                     <td> {{ord.user.username}}   </td>   
+                     <td> {{ord.date}}   </td>    
+                     <td> {{ord.status}} </td> 
+                     <td> {{ord.amount}} </td>      
+                     <td> {{ord.action}} </td>  
+                     <td> {{ord.room}}   </td>  
+                     <td> {{ord.ext}}    </td> 
+         
+                   
+                     <td> <button class="btn btn-warning"   
+                        (click)="ShowProduct(ord._id)" >
+                        Details 
+                     </button> </td>     
+                 </tr>
+             </tbody>        
+         </table>
+    <br><hr>
+    <h2 class="text-center text-warning">  Order Item ID( {{OrderSelct}} ) </h2>
+    
+         <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+          
+                <th scope="col"></th>
+                <th colspan="2">Product</th>
+                <th scope="col">Price</th>
+                <!-- <th scope="col">Quantity</th> -->
+          
+                <th colspan="2">Available</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let product of producOrdereList; index as i">
+              <tr>
+                <th scope=" row">{{i+1}}</th>
+                <td colspan="2"><img [src]="product.img" [alt]="product.name" srcset="" style="width:100px;"></td>
+                <td>
+                  {{product.name}}
+                </td>
+                <td>
+                  {{product.price | currency}}
+                </td>
+    
+                <td>
+                    {{product.IsAvailable}}
+                </td>
+               
+          
+              </tr>
+            </tbody>
+          </table>
+    
+        </header>
+      </div>
+    
+    </div>
   </div>
