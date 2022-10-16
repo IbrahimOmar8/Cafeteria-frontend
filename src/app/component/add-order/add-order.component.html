@@ -26,8 +26,8 @@
 
 
 
-                                    <td> <button class="btn btn-warning" (click)="addProdcut(prod)">
-                                            add To Order
+                                    <td> <button class="btn btn-warning" (click)="FunRemove(prod._id)">
+                                            Delete
                                         </button> </td>
                                 </tr>
                             </tbody>
@@ -35,26 +35,26 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="note" class="form-label">Note: </label>
-                        <input type="text" class="form-control" id="note">
+                        <label for="note" class="form-label">status : </label>
+                        <input type="text" class="form-control"  [(ngModel)]="MyOrder.status">
                     </div>
 
                     <div class="mb-3">
                         <label for="room" class="form-label">Room: </label>
-                        <input type="number" class="form-control" id="room">
+                        <input type="number" class="form-control"  [(ngModel)]="MyOrder.room">
                     </div>
 
                     <div class="mb-3">
                         <label for="action" class="form-label">Action: </label>
-                        <input type="text" class="form-control" id="action">
+                        <input type="text" class="form-control"  [(ngModel)]="MyOrder.action">
                     </div>
 
                     <div class="mb-3">
                         <label for="amount" class="form-label">Total Price: </label>
-                        <input type="text" class="form-control" id="amount">
+                        <input type="text" class="form-control"   [(ngModel)]="MyOrder.amount">
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" [disabled]="myForm.invalid" class="btn btn-primary">Submit</button>
                 </form>
 
             </div>
