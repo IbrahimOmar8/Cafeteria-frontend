@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit {
   isLoggedIn = false;
   IsAdmin = false;
   IsUser = false;
-  username?: string;
+  username?: string; 
 
   faHome = faHome;
   faCube =faMugHot;
