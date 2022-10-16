@@ -1,72 +1,77 @@
-<h1 class="title">Orders</h1>
-<div class="line"></div>
-
-
- 
-<div>
-    <div>
-      <label>action: </label>
-      <input [(ngModel)]="newOrd.action" />
-    </div>      {{newOrd.action}}
-
-    <div>
-        <label>room: </label>
-        <input [(ngModel)]="newOrd.room" />
-      </div>      {{newOrd.room}}
-
-      <div>
-        <label>id: </label>
-        <input [(ngModel)]="newOrd._id" />
-      </div> 
-      {{newOrd._id}}
-      <div>
-        <label>ext: </label>
-        <input [(ngModel)]="newOrd.ext" />
-      </div> 
-      {{newOrd.ext}}
-      <div>
-        <label>status: </label>
-        <input [(ngModel)]="newOrd.status" />
-      </div>       {{newOrd.status}}
-      <div>
-        <label>amount: </label>
-        <input [(ngModel)]="newOrd.amount" />      {{newOrd.amount}}
-
-      </div>
-    <div>
-      <button (click)="addnewOrder()">Add </button>
-    </div>
-  </div>
-
-<div class="orders-container mb-2"  *ngFor="let item of orderList">
-<button (click)="onEdite(item._id)">edit</button>
-<button class="close-btn me-1" (click)="onDelete(item._id , item)"><i class="fa-solid fa-trash"
-    style="color: red;"></i></button>
-
-
-<div class="card mb-3 prod-car" style="max-width: 540px; border: none">
-    <div class="row row-cols-2 g-0 d-flex w-100">
-      <div class="col-4 p-1 ">
-        <img src="https://img.freepik.com/premium-photo/cup-coffee-oriental-style-metal-tray_93675-107319.jpg?size=626&ext=jpg&ga=GA1.2.1932154363.1665712397" class="img-fluid rounded-circle h-100" alt="...">
-      </div>
-      <div class="col-8">
-        <div class="card-body position-relative card-content">
-          <h5 class="card-title">date: {{item?.date}}</h5>
-          <p class="card-text">user: <small >{{item?.user.username}}</small></p>
-          <p class="card-text">room: <small >{{item?.room}}</small></p>
-          <p class="card-text">ext: <small >{{item?.ext}}</small></p>
-          <p class="card-text">action: <small >{{item?.action}}</small></p>
-          <p class="card-text position-absolute bottom-0 end-0">price: <small >{{item?.amount}} <sup>$</sup></small></p>
   
+<div class="row row-cols-1 row-cols-md-3 g-4 w-100 m-2">
+  <div class="col w-50"  *ngFor="let item of orderList" 
+   [ngClass]="{'bg-danger': item.amount == 0  }"
+  [ngClass]="{'bg-warning':  this.OrderSelct  == item._id }"
+  >
+  
+      <div class="card mb-3 order-card w-100" style=" border: none">
+        
+        <div class="row row-cols-2 g-0 d-flex ">
+  
+          <div class="col w-100">
+            <div class="card-body position-relative card-content w-100">
+              <h5 class="card-title">id:{{item?._id}}</h5>
+              <h5 class="card-title">date: {{item?.date}}</h5>
+              <h5  class="card-title"> user: <span class="orange"> {{item?.user?.username}}</span> </h5>
+              <p class="card-text">room: {{item?.status}}</p>
+              <p class="card-text">room: {{item?.room}}</p>
+              <p class="card-text">amount: {{item?.amount}}</p>
+              <p class="card-text">action: {{item?.action}}</p>
+              <p class="card-text position-absolute bottom-0 end-0 m-1 fs-5 orange" >price: {{item?.ext}} <sup>$</sup></p>
+           
+           
+               <input #itemCount  type="number" class="form-control"> 
+               <button class="btn btn-warning m-1"   
+                 (click)="ShowProduct(item._id)" 
+                 (click)="getOrderById(item?._id)"
+                 >
+                 Details 
+              </button> 
+              <button class="btn btn-danger m-1" (click)="onDelete(item?._id, item)">Delete Order</button>
+           
+            </div>
+          </div>
+          
         </div>
       </div>
-    </div>
+  
+  </div>
   </div>
 
 
 
+  <h2 class="text-center text-warning mb-4">  Order Item ID( {{OrderSelct}} ) </h2>
 
-    <!-- <app-card [content]="cardContent" [ord]="orderList" ></app-card> -->
 
+  <div class="col w-100" >
+ 
+     <div class="card mb-3 order-card w-100" style=" border: none">
+       
+       <div class="row row-cols-2 g-0 d-flex ">
+ 
+         <!-- <div class="col-4 p-1 ">
+           <img src="https://img.freepik.com/premium-photo/cup-coffee-oriental-style-metal-tray_93675-107319.jpg?size=626&ext=jpg&ga=GA1.2.1932154363.1665712397" class="img-fluid rounded-circle h-50" alt="...">
+         </div> -->
+ 
+         <div class="col">
+           <div class="card-body position-relative card-content">
+             <h5 class="card-title">id: {{selectedOrder?._id}}</h5>
+             <h5 class="card-title">date: {{selectedOrder?.date}}</h5>
+             <h5  class="card-title"> user: <span class="orange"> {{selectedOrder?.user?.username}}</span> </h5>
+             <p class="card-text">room: {{selectedOrder?.status}}</p>
+             <p class="card-text">room: {{selectedOrder?.room}}</p>
+             <p class="card-text">amount: {{selectedOrder?.amount}}</p>
+             <p class="card-text">action: {{selectedOrder?.action}}</p>
+             <!-- <p class="card-text position-absolute bottom-0 end-0 m-1 fs-5 orange" >price: {{selectedOrder?.ext}} <sup>$</sup></p> -->
+          
+        
+          
+           </div>
+         </div>
+         
+       </div>
+     </div>
+ 
+ </div>
 
-</div>

@@ -1,7 +1,10 @@
 import { Component, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { Iorder } from 'src/app/interface/iorder';
+import { Iprodcut } from 'src/app/interface/iprodcut';
 import { Order } from 'src/app/order';
 import { OrderService } from 'src/app/services/order.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-orders',
@@ -10,33 +13,18 @@ import { OrderService } from 'src/app/services/order.service';
 })
 export class OrdersComponent implements OnInit, OnChanges {
 
+  orderList : Iorder[] =  [];
 
-  orderList: Order[] =[];
+  producOrdereList : Iprodcut[] = []
 
+   OrderSelct :string ="[0]" ;
 
-  
-  newOrd:any = {
-    _id:'',
-    user: '',
-    date:new Date(),
-    status:'',
-    amount:0,
-    action:'',    
-      room:0,
-    ext:0
-         
-  };
-
-
-  editMode: boolean =false;
-  currentOrderId: string =''
-@ViewChild('orderForm') form: any
-
-
-
+   selectedOrder :any 
 
   constructor(
     private orderServ: OrderService,
+    private userService: UserService,
+    private orderService : OrderService,
     private router : Router
     ) { 
      }
@@ -49,27 +37,35 @@ export class OrdersComponent implements OnInit, OnChanges {
   // }
 
 
-
-   
-
-
   }
+
+
+
+  getOrderById(id:any){
+    this.orderServ.getOrderById(id).subscribe((data: any) => {
+      this.selectedOrder = data;
+      console.log(data);
+      console.log(this.selectedOrder);
+
+    });
+  }
+
+
+
 
   ngOnChanges() {
   }
 
+  ShowProduct(orderID :string){
+    this.OrderSelct = orderID ;     
+    const orderSelct = this.orderList.filter( (obj) =>
+    obj._id == orderID
+    )    
+    this.producOrdereList = orderSelct[0].Prodeuct
+   }
 
-  addnewOrder() {
-    this.orderServ.addOrder(this.newOrd).subscribe((data: any) => {
-      this.orderList.push(data)
-      console.log(data);
-      console.log(this.newOrd)
-    }) 
-console.log(this.newOrd)
-  }
-  
 
-  onDelete(id:string, order: any){
+  onDelete(id:any, order: any){
     const observer = {
       next: () => {
         console.log('removed succesfully');
@@ -82,14 +78,5 @@ console.log(this.newOrd)
     this.orderServ.deleteOrder(id).subscribe(observer);
   }
 
-
-
-
-  onEdite( id:string ){
-  }
-
-  onDone(action:string){
-      this.orderServ.updateOrder(this.currentOrderId , action)
-  }
 
 }

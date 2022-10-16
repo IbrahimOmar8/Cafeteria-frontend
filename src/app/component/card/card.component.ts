@@ -35,13 +35,11 @@ export class CardComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     console.log("content: " + this.content)
-    console.log("content: " + this.ord)
   
 
   } 
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("ooooooo: " + this.content)
 
   }
 

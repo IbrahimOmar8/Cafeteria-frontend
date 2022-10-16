@@ -27,3 +27,17 @@
     border: none ;
     box-shadow: 0 0 0 0.05rem #524235 ;
 }
+
+
+
+
+/**/
+/* .order-card{
+display: flex !important;
+flex-direction: row ;
+flex-wrap: wrap;
+} */
+
+.orange{
+    color:#FD7D00 
+}
