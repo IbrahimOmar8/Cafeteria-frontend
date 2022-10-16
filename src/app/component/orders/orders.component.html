@@ -13,12 +13,12 @@
             <div class="card-body position-relative card-content w-100">
               <h5 class="card-title">id:{{item?._id}}</h5>
               <h5 class="card-title">date: {{item?.date}}</h5>
-              <h5  class="card-title"> user: <span class="orange"> {{item?.user?.username}}</span> </h5>
-              <p class="card-text">room: {{item?.status}}</p>
+              <h5  class="card-title"> user: <span class="orange fs-4"> {{item?.user?.username}}</span> </h5>
+              <p class="card-text">status: {{item?.status}}</p>
               <p class="card-text">room: {{item?.room}}</p>
               <p class="card-text">amount: {{item?.amount}}</p>
               <p class="card-text">action: {{item?.action}}</p>
-              <p class="card-text position-absolute bottom-0 end-0 m-1 fs-5 orange" >price: {{item?.ext}} <sup>$</sup></p>
+              <p class="card-text position-absolute bottom-0 end-0 m-1 fs-5 orange fs-4" >price: {{item?.ext}} <sup>$</sup></p>
            
            
                <input #itemCount  type="number" class="form-control"> 
@@ -51,20 +51,16 @@
        
        <div class="row row-cols-2 g-0 d-flex ">
  
-         <!-- <div class="col-4 p-1 ">
-           <img src="https://img.freepik.com/premium-photo/cup-coffee-oriental-style-metal-tray_93675-107319.jpg?size=626&ext=jpg&ga=GA1.2.1932154363.1665712397" class="img-fluid rounded-circle h-50" alt="...">
-         </div> -->
- 
          <div class="col">
-           <div class="card-body position-relative card-content">
+           <div class="card-body position-relative card-content ">
              <h5 class="card-title">id: {{selectedOrder?._id}}</h5>
              <h5 class="card-title">date: {{selectedOrder?.date}}</h5>
-             <h5  class="card-title"> user: <span class="orange"> {{selectedOrder?.user?.username}}</span> </h5>
-             <p class="card-text">room: {{selectedOrder?.status}}</p>
+             <h5  class="card-title"> user: <span class="orange fs-4"> {{selectedOrder?.user?.username}}</span> </h5>
+             <p class="card-text">status: {{selectedOrder?.status}}</p>
              <p class="card-text">room: {{selectedOrder?.room}}</p>
              <p class="card-text">amount: {{selectedOrder?.amount}}</p>
              <p class="card-text">action: {{selectedOrder?.action}}</p>
-             <!-- <p class="card-text position-absolute bottom-0 end-0 m-1 fs-5 orange" >price: {{selectedOrder?.ext}} <sup>$</sup></p> -->
+             <p class="card-text position-relative bottom-0 end-0  orange fs-4" >price: {{selectedOrder?.ext}} <sup>$</sup></p>
           
         
           
