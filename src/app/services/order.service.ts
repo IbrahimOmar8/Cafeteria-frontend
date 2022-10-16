@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders , HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { faColonSign } from '@fortawesome/free-solid-svg-icons';
 import { catchError, Observable, retry, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { IOrderForAdd } from '../interface/i-order-for-add';
 import { Iorder } from '../interface/iorder';
 
 
@@ -68,8 +70,8 @@ export class OrderService {
 
   }
 
-  addOrder(newOrder:Iorder) : Observable<Iorder>{
-    return this.HttpClient.post<Iorder>(`${environment.BasicURL}orders`,
+  addOrder(newOrder:IOrderForAdd) : Observable<Iorder>{
+    return this.HttpClient.post<Iorder>(`${environment.BasicURL}orders`,    
      JSON.stringify(newOrder),httpOptions)
     .pipe(
       retry(2),
