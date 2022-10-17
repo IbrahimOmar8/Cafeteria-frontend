@@ -12,7 +12,9 @@
           <div class="col w-100">
             <div class="card-body position-relative card-content w-100">
               <h5 class="card-title">id:{{item?._id}}</h5>
-              <h5 class="card-title">date: {{item?.date}}</h5>
+              <h5 class="card-title">date: {{
+                this.pipe.transform( item.date, 'dd/MM/yyyy')
+               }}</h5>
               <h5  class="card-title"> user: <span class="orange fs-4"> {{item?.user?.username}}</span> </h5>
               <p class="card-text">status: {{item?.status}}</p>
               <p class="card-text">room: {{item?.room}}</p>
@@ -21,7 +23,6 @@
               <p class="card-text position-absolute bottom-0 end-0 m-1 fs-5 orange fs-4" >price: {{item?.ext}} <sup>$</sup></p>
            
            
-               <input #itemCount  type="number" class="form-control"> 
                <button class="btn btn-warning m-1"   
                  (click)="ShowProduct(item._id)" 
                  (click)="getOrderById(item?._id)"
@@ -58,9 +59,9 @@
              <h5  class="card-title"> user: <span class="orange fs-4"> {{selectedOrder?.user?.username}}</span> </h5>
              <p class="card-text">status: {{selectedOrder?.status}}</p>
              <p class="card-text">room: {{selectedOrder?.room}}</p>
-             <p class="card-text">amount: {{selectedOrder?.amount}}</p>
+             <p class="card-text">amount: {{selectedOrder?.ext}}</p>
              <p class="card-text">action: {{selectedOrder?.action}}</p>
-             <p class="card-text position-relative bottom-0 end-0  orange fs-4" >price: {{selectedOrder?.ext}} <sup>$</sup></p>
+             <p class="card-text position-relative bottom-0 end-0  orange fs-4" >price: {{selectedOrder?.amount}} <sup>$</sup></p>
           
         
           

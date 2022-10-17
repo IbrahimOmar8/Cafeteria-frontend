@@ -1,10 +1,11 @@
-import { Component, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Iorder } from 'src/app/interface/iorder';
 import { Iprodcut } from 'src/app/interface/iprodcut';
 import { Order } from 'src/app/order';
 import { OrderService } from 'src/app/services/order.service';
 import { UserService } from 'src/app/services/user.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-orders',
@@ -20,6 +21,7 @@ export class OrdersComponent implements OnInit, OnChanges {
    OrderSelct :string ="[0]" ;
 
    selectedOrder :any 
+   pipe = new DatePipe('en-US');
 
   constructor(
     private orderServ: OrderService,

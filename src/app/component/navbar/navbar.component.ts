@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faHome, faMugHot, faUserAlt, faReceipt, faPlus, faRectangleList, faRightToBracket, faUserPlus, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faMugHot, faUserAlt, faReceipt, faPlus, faRectangleList, faRightToBracket, faUserPlus, faRightFromBracket  } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/services/auth.service';
 import { StorageService } from 'src/app/services/storage.service';
 
