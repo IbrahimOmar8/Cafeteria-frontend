@@ -25,24 +25,17 @@ export class AddOrderComponent implements OnInit {
   IsUser = false;
   user: Iuser = {} as Iuser;
 
-<<<<<<< HEAD
+
   orderDate : Iorder[] =  [];
   startDate:Date =new Date("2021-01-11")
   endDate:Date =new Date("2022-11-01")
   // prevMonth:any = new Date();
   MyOrder :Iorder ={} as Iorder ;
-=======
-  orderList: Iorder[] = [];
-  startDate: Date = new Date();
-  endDate: Date = new Date();
-  prevMonth: any = new Date();
-  MyOrder: Iorder = {} as Iorder;
->>>>>>> b5118d9db00e32313033ac8a28507abc23cd6459
   products: Iprodcut[] = [];
   Orderproducts: Iprodcut[] = [];
   objOrderForAdd: IOrderForAdd = {} as IOrderForAdd;
 
-<<<<<<< HEAD
+
   pipe = new DatePipe('en-US');
 
 
@@ -58,15 +51,6 @@ export class AddOrderComponent implements OnInit {
     // console.log(this.startDate , this.endDate);
 
      }
-=======
-  constructor(
-    private productsService: ProductsService,
-    private orderServ: OrderService,
-    private storageService: StorageService,
-    private authService: AuthService,
-    private route: Router
-  ) {}
->>>>>>> b5118d9db00e32313033ac8a28507abc23cd6459
 
   ngOnInit(): void {
     this.productsService.getProducts().subscribe((data: any) => {
@@ -75,7 +59,7 @@ export class AddOrderComponent implements OnInit {
 
     this.isLoggedIn = this.storageService.isLoggedIn();
 
-<<<<<<< HEAD
+
    if (this.isLoggedIn) {
         this.user = this.storageService.getUser();
         this.roles = this.user.roles;
@@ -89,18 +73,6 @@ export class AddOrderComponent implements OnInit {
         console.log(data);
       });
 
-=======
-    if (this.isLoggedIn) {
-      this.user = this.storageService.getUser();
-      this.roles = this.user.roles;
-      this.IsAdmin = this.roles.includes('ROLE_ADMIN');
-      this.IsUser = this.roles.includes('ROLE_USER');
-    }
-    //  this.orderServ.getOrdersByDate(this.startDate, this.endDate).subscribe((data: any) => {
-    //    this.orderList = data;
-    //    console.log(data);
-    //  });
->>>>>>> b5118d9db00e32313033ac8a28507abc23cd6459
   }
 
   addProdcut(prod: Product) {

@@ -13,7 +13,7 @@ import { DatePipe } from '@angular/common';
 })
 export class HomeComponent implements OnInit {
   content?: string;
-<<<<<<< HEAD
+
   OutPutTestAPI :String = "";
   orderList : Iorder[] =  [];
   producOrdereList : Iprodcut [] = []
@@ -23,14 +23,6 @@ export class HomeComponent implements OnInit {
 startDate:Date= new Date();
 endDate:Date = new Date()
 pipe = new DatePipe('en-US');
-=======
-  OutPutTestAPI: String = '';
-  orderList: Iorder[] = [];
-
-  producOrdereList: Iprodcut[] = [];
-
-  OrderSelct: string = '[0]';
->>>>>>> b5118d9db00e32313033ac8a28507abc23cd6459
 
   constructor(
     private userService: UserService,
@@ -55,9 +47,9 @@ pipe = new DatePipe('en-US');
     this.producOrdereList = orderSelct[0].Prodeuct;
 
     //console.log(this.producOrdereList);
-<<<<<<< HEAD
+  }
 
-   }
+   
 
   handleSelect(){
     this.orderService.getOrdersByDate(this.startDate, this.endDate).subscribe((data: any) => {
@@ -68,7 +60,4 @@ pipe = new DatePipe('en-US');
     }); 
   }
 
-=======
-  }
->>>>>>> b5118d9db00e32313033ac8a28507abc23cd6459
 }

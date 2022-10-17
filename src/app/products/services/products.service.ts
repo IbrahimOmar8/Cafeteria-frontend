@@ -70,11 +70,6 @@ export class ProductsService {
     return this.http
       .get<Category[]>(`${environment.BasicURL}/category`)
       .pipe(retry(2), catchError(this.handleErr));
-<<<<<<< HEAD
-}
-  onChangeProd(product:Product[]){
-  return  this.products = product
-=======
   }
   getProductsOfCategory(categoryName: any): Observable<any> {
     return this.http
@@ -87,6 +82,9 @@ export class ProductsService {
     return this.http
       .get<Product[]>(`${environment.BasicURL}/products/search?q=${query}`)
       .pipe(retry(2), catchError(this.handleErr));
->>>>>>> b5118d9db00e32313033ac8a28507abc23cd6459
+
+}
+  onChangeProd(product:Product[]){
+  return  this.products = product
   }
 }
