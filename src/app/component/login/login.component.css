@@ -64,7 +64,7 @@ html {
     width: inherit;
     height: inherit;
     box-sizing: border-box;
-    border: solid 2.5px #217093;
+    border: solid 2.5px #9A7D60;
     border-radius: 50%;
   }
   form .inputGroup {
@@ -79,7 +79,7 @@ html {
     margin: 0 0 12px;
     display: block;
     font-size: 1.25em;
-    color: #217093;
+    color: #9A7D60;
     font-weight: 700;
     font-family: inherit;
   }
@@ -93,8 +93,7 @@ html {
     margin: 0;
     padding: 0 1em 0;
     padding: 0.875em 1em 0;
-    background-color: #f3fafd;
-    border: solid 2px #217093;
+    border: solid 2px #9A7D60;
     border-radius: 4px;
     -webkit-appearance: none;
     box-sizing: border-box;
@@ -114,13 +113,11 @@ html {
   form input[type=password]:focus {
     outline: none;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-    border: solid 2px #4eb8dd;
   }
   form button {
     display: block;
     margin: 0;
     padding: 0.65em 1em 1em;
-    background-color: #4eb8dd;
     border: none;
     border-radius: 4px;
     box-sizing: border-box;
@@ -133,9 +130,7 @@ html {
     font-family: inherit;
     transition: background-color 0.2s ease-out;
   }
-  form button:hover, form button:active {
-    background-color: #217093;
-  }
+ 
   form .inputGroup1 .helper {
     position: absolute;
     z-index: 1;
@@ -146,7 +141,7 @@ html {
     left: 0;
     transform: translate(1em, 2.2em) scale(1);
     transform-origin: 0 0;
-    color: #217093;
+    color: #9A7D60;
     font-size: 1.55em;
     font-weight: 400;
     opacity: 0.65;
@@ -183,7 +178,7 @@ html {
     height: 0.85em;
     width: 0.85em;
     background-color: #f3fafd;
-    border: solid 2px #217093;
+    border: solid 2px #9A7D60;
     border-radius: 3px;
   }
   form .inputGroup2 #showPasswordToggle .indicator:after {
@@ -193,7 +188,7 @@ html {
     top: 0.025em;
     width: 0.2em;
     height: 0.5em;
-    border: solid #217093;
+    border: solid #9A7D60;
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
     visibility: hidden;
@@ -203,7 +198,7 @@ html {
   }
   form .inputGroup2 #showPasswordToggle input:focus ~ .indicator,
   form .inputGroup2 #showPasswordToggle input:hover ~ .indicator {
-    border-color: #4eb8dd;
+    border-color: #FD7D00;
   }
   form .inputGroup2 #showPasswordToggle input:disabled ~ .indicator {
     opacity: 0.5;

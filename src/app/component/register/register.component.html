@@ -1,10 +1,11 @@
 
-<div class="col-md-12">
-    <div class="card card-container">
+<div class="col-md-12 p-3">
+    <div class="card card-container ">
      
       <form
+      class="p-5 position-relative "
         *ngIf="!isSuccessful"
-        name="form"
+        name="form "
         (ngSubmit)="f.form.valid && onSubmit()"
         #f="ngForm"
         novalidate
@@ -71,7 +72,7 @@
           </div>
         </div>     
         <div class="form-group">
-          <button class="btn btn-primary btn-block">Sign Up</button>
+          <button class="btn btn-warning mt-1 btn-block position-absolute w-50" style="left: 25%;">Sign Up</button>
         </div>
   
         <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">

@@ -4,6 +4,7 @@ import { UserService } from '../../services/user.service';
 import { Iorder } from 'src/app/interface/iorder';
 import { Iprodcut } from 'src/app/interface/iprodcut';
 import { OrderService } from 'src/app/services/order.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -12,12 +13,15 @@ import { OrderService } from 'src/app/services/order.service';
 })
 export class HomeComponent implements OnInit {
   content?: string;
-  OutPutTestAPI: String = '';
-  orderList: Iorder[] = [];
+  OutPutTestAPI :String = "";
+  orderList : Iorder[] =  [];
+  producOrdereList : Iprodcut [] = []
+  OrderSelct :string ="[0]" ;
+  orderDate : Iorder[] =  [];
 
-  producOrdereList: Iprodcut[] = [];
-
-  OrderSelct: string = '[0]';
+startDate:Date= new Date();
+endDate:Date = new Date()
+pipe = new DatePipe('en-US');
 
   constructor(
     private userService: UserService,
@@ -42,5 +46,16 @@ export class HomeComponent implements OnInit {
     this.producOrdereList = orderSelct[0].Prodeuct;
 
     //console.log(this.producOrdereList);
+
+   }
+
+  handleSelect(){
+    this.orderService.getOrdersByDate(this.startDate, this.endDate).subscribe((data: any) => {
+      this.orderDate = data;
+      console.log(this.startDate , this.endDate);
+
+      console.log(data);
+    }); 
   }
+
 }

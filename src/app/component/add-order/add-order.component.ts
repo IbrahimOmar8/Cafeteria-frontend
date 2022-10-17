@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router, TitleStrategy } from '@angular/router';
@@ -24,22 +25,33 @@ export class AddOrderComponent implements OnInit {
   IsUser = false;
   user: Iuser = {} as Iuser;
 
-  orderList: Iorder[] = [];
-  startDate: Date = new Date();
-  endDate: Date = new Date();
-  prevMonth: any = new Date();
-  MyOrder: Iorder = {} as Iorder;
+  orderDate : Iorder[] =  [];
+  startDate:Date =new Date("2021-01-11")
+  endDate:Date =new Date("2022-11-01")
+  // prevMonth:any = new Date();
+  MyOrder :Iorder ={} as Iorder ;
+
   products: Iprodcut[] = [];
   Orderproducts: Iprodcut[] = [];
   objOrderForAdd: IOrderForAdd = {} as IOrderForAdd;
 
-  constructor(
-    private productsService: ProductsService,
-    private orderServ: OrderService,
+
+  pipe = new DatePipe('en-US');
+
+
+  constructor( private productsService: ProductsService,
+    private orderServ: OrderService ,
     private storageService: StorageService,
-    private authService: AuthService,
-    private route: Router
-  ) {}
+     private authService: AuthService,
+     private route :Router) {
+    // this.startDate = this.endDate.setMonth(this.endDate.getMonth()-1);
+
+    // this.pipe.transform( this.startDate, 'dd/MM/yyyy')
+    // this.pipe.transform( this.endDate, 'dd/MM/yyyy')
+    // console.log(this.startDate , this.endDate);
+
+     }
+
 
   ngOnInit(): void {
     this.productsService.getProducts().subscribe((data: any) => {
@@ -48,17 +60,20 @@ export class AddOrderComponent implements OnInit {
 
     this.isLoggedIn = this.storageService.isLoggedIn();
 
-    if (this.isLoggedIn) {
-      this.user = this.storageService.getUser();
-      this.roles = this.user.roles;
-      this.IsAdmin = this.roles.includes('ROLE_ADMIN');
-      this.IsUser = this.roles.includes('ROLE_USER');
-    }
-    //  this.orderServ.getOrdersByDate(this.startDate, this.endDate).subscribe((data: any) => {
-    //    this.orderList = data;
-    //    console.log(data);
-    //  });
-  }
+   if (this.isLoggedIn) {
+        this.user = this.storageService.getUser();
+        this.roles = this.user.roles;
+        this.IsAdmin = this.roles.includes('ROLE_ADMIN');
+        this.IsUser = this.roles.includes('ROLE_USER');
+      }
+      this.orderServ.getOrdersByDate(this.startDate, this.endDate).subscribe((data: any) => {
+        this.orderDate = data;
+        console.log(this.startDate , this.endDate);
+  
+        console.log(data);
+      });
+
+
 
   addProdcut(prod: Product) {
     //  console.log(prod);

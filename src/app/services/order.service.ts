@@ -59,7 +59,7 @@ export class OrderService {
 
 
   getOrdersByDate(startDate:any, endDate:any){
-    return this.HttpClient.get<Iorder>(`${environment.BasicURL}orders/?startDate=${startDate}&endDate=${endDate}`)
+    return this.HttpClient.get<Iorder>(`${environment.BasicURL}orders/date_range?startDate=${startDate}&endDate=${endDate}`)
     .pipe(
       retry(2),
       catchError(this.handleError)
