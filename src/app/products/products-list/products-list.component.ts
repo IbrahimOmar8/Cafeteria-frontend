@@ -1,8 +1,8 @@
 import { ProductsService } from './../services/products.service';
 import { Product } from './../interfaces/product';
-import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { Category } from '../interfaces/category';
 
 @Component({
   selector: 'app-products-list',
@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
 })
 export class ProductsListComponent implements OnInit {
   products: Product[] = [];
+  categories: Category[] = [];
+  selectedCatgeory: string = '';
+  searchQuery: string = '';
   constructor(
     private productsService: ProductsService,
     private router: Router
@@ -19,12 +22,11 @@ export class ProductsListComponent implements OnInit {
   ngOnInit(): void {
     this.productsService.getProducts().subscribe((data: any) => {
       this.products = data;
-      console.log(data);
-       this.productsService.onChangeProd(data)
-      console.log( "p :  "+this.productsService.products) 
-
     });
- }
+    this.productsService.getCategories().subscribe((data: any) => {
+      this.categories = data;
+    });
+  }
   onDelete(id: number, product: any) {
     const observer = {
       next: () => {
@@ -39,5 +41,33 @@ export class ProductsListComponent implements OnInit {
   }
   onEdit(id: number) {
     this.router.navigate(['products/edit', id]);
+  }
+  onChangeSelect() {
+    let selectedCatgeory = this.selectedCatgeory;
+
+    this.productsService
+      .getProductsOfCategory(selectedCatgeory)
+      .subscribe((data) => {
+        this.products = data;
+      });
+    if (selectedCatgeory == '') {
+      this.productsService.getProducts().subscribe((data) => {
+        this.products = data;
+      });
+    }
+  }
+  onSearch() {
+    let query = this.searchQuery;
+    if (query.length > 2) {
+      this.productsService.searchProducts(query).subscribe((data) => {
+        this.products = data;
+      });
+    }
+    if (query.length == 0) {
+      this.productsService.getProducts().subscribe((data) => {
+        this.products = data;
+      });
+    }
+    console.log(this.products);
   }
 }
