@@ -63,7 +63,7 @@
         </div>
         <div class="mt-4 pt-2 d-flex justify-content-center">
           <input class="btn btn-primary btn-lg" type="submit" [disabled]="!productForm.valid" value="Save" />
-          <input class="btn btn-danger btn-lg ms-2" type="reset" value="Reset" />
+          <input class="btn btn-danger btn-lg ms-2" type="button" value="Reset" (click)="resetForm()" />
         </div>
 
       </form>

@@ -24,34 +24,31 @@ export class AddOrderComponent implements OnInit {
   IsAdmin = false;
   IsUser = false;
   user: Iuser = {} as Iuser;
+  total: number = 0;
 
-  orderDate : Iorder[] =  [];
-  startDate:Date =new Date("2021-01-11")
-  endDate:Date =new Date("2022-11-01")
+  orderDate: Iorder[] = [];
+  startDate: Date = new Date('2021-01-11');
+  endDate: Date = new Date('2022-11-01');
   // prevMonth:any = new Date();
-  MyOrder :Iorder ={} as Iorder ;
-
+  MyOrder: Iorder = {} as Iorder;
   products: Iprodcut[] = [];
   Orderproducts: Iprodcut[] = [];
   objOrderForAdd: IOrderForAdd = {} as IOrderForAdd;
-
-
+  prodCount: number = 1;
   pipe = new DatePipe('en-US');
 
-
-  constructor( private productsService: ProductsService,
-    private orderServ: OrderService ,
+  constructor(
+    private productsService: ProductsService,
+    private orderServ: OrderService,
     private storageService: StorageService,
-     private authService: AuthService,
-     private route :Router) {
+    private authService: AuthService,
+    private route: Router
+  ) {
     // this.startDate = this.endDate.setMonth(this.endDate.getMonth()-1);
-
     // this.pipe.transform( this.startDate, 'dd/MM/yyyy')
     // this.pipe.transform( this.endDate, 'dd/MM/yyyy')
     // console.log(this.startDate , this.endDate);
-
-     }
-
+  }
 
   ngOnInit(): void {
     this.productsService.getProducts().subscribe((data: any) => {
@@ -60,27 +57,28 @@ export class AddOrderComponent implements OnInit {
 
     this.isLoggedIn = this.storageService.isLoggedIn();
 
-   if (this.isLoggedIn) {
-        this.user = this.storageService.getUser();
-        this.roles = this.user.roles;
-        this.IsAdmin = this.roles.includes('ROLE_ADMIN');
-        this.IsUser = this.roles.includes('ROLE_USER');
-      }
-      this.orderServ.getOrdersByDate(this.startDate, this.endDate).subscribe((data: any) => {
+    if (this.isLoggedIn) {
+      this.user = this.storageService.getUser();
+      this.roles = this.user.roles;
+      this.IsAdmin = this.roles.includes('ROLE_ADMIN');
+      this.IsUser = this.roles.includes('ROLE_USER');
+    }
+    this.orderServ
+      .getOrdersByDate(this.startDate, this.endDate)
+      .subscribe((data: any) => {
         this.orderDate = data;
-        console.log(this.startDate , this.endDate);
-  
+        console.log(this.startDate, this.endDate);
+
         console.log(data);
       });
-
-
+  }
 
   addProdcut(prod: Product) {
-    //  console.log(prod);
     let isFrist = true;
     this.Orderproducts.forEach((element) => {
       if (element._id == prod._id) {
-        element.size += 1;
+        this.prodCount += 1;
+        element.size += ` count: ` + this.prodCount;
         isFrist = false;
       }
     });
@@ -91,17 +89,25 @@ export class AddOrderComponent implements OnInit {
     }
 
     this.MyOrder.Prodeuct = this.Orderproducts;
-    //console.log(prod.price);
-    //console.log(this.MyOrder.amount);
+    console.log('totaL:', this.total);
 
-    this.MyOrder.amount += prod.price;
+    this.total += prod.price;
+    console.log('totaL:', this.total);
+
+    this.MyOrder.amount = this.total;
   }
 
-  FunRemove(prodID: string) {
+  FunRemove(prodID: string, price: number) {
     this.MyOrder.Prodeuct = this.MyOrder.Prodeuct.filter(
       (obj) => obj._id !== prodID
     );
+
     this.Orderproducts = this.MyOrder.Prodeuct;
+    console.log(price);
+    console.log(this.total);
+
+    this.total -= price;
+    this.MyOrder.amount = this.total;
   }
 
   FunMapingObj(): void {
