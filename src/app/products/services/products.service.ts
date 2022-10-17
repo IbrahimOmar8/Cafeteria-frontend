@@ -7,13 +7,14 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { environment } from '../../../environments/environment.prod';
+import { Category } from '../interfaces/category';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
   httpOption;
-  products:Product[]=[]
+  products: Product[] = [];
   constructor(private http: HttpClient) {
     this.httpOption = {
       headers: new HttpHeaders({
@@ -49,7 +50,7 @@ export class ProductsService {
   updateProduct(id: number, product: Product) {
     return this.http
       .put(
-        `${environment.BasicURL}/${id}`,
+        `${environment.BasicURL}/product/${id}`,
         JSON.stringify(product),
         this.httpOption
       )
@@ -67,14 +68,19 @@ export class ProductsService {
   }
   getCategories(): Observable<any> {
     return this.http
-      .get<any>(`${environment.BasicURL}/category`)
+      .get<Category[]>(`${environment.BasicURL}/category`)
       .pipe(retry(2), catchError(this.handleErr));
-<<<<<<< HEAD
-
-=======
->>>>>>> fcdb4e4e30958e6498e081bd104e5c02f64c7a53
   }
-  onChangeProd(product:Product[]){
-  return  this.products = product
+  getProductsOfCategory(categoryName: any): Observable<any> {
+    return this.http
+      .get<Product[]>(
+        `${environment.BasicURL}/products/category?category=${categoryName}`
+      )
+      .pipe(retry(2), catchError(this.handleErr));
+  }
+  searchProducts(query: string): Observable<any> {
+    return this.http
+      .get<Product[]>(`${environment.BasicURL}/products/search?q=${query}`)
+      .pipe(retry(2), catchError(this.handleErr));
   }
 }

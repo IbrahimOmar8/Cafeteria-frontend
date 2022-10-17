@@ -1,7 +1,7 @@
 <section class="vh-100 gradient-custom">
   <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
     <div class="card-body p-4 p-md-5">
-      <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Product Details</h3>
+      <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Add Product Details</h3>
       <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
         <div class="row">
           <div class="col-md-12 mb-2 pb-1">
@@ -28,18 +28,12 @@
               Product price is required </div>
           </div>
           <div class="row">
-            <div class="col-4 mb-2 pb-1">
+            <div class="col-4">
               <label for="inputState" class="form-label">Category</label>
-              <select id="inputState" class="form-select" formControlName="category" (change)="changeCategory($event)">
-                <option selected>Choose...</option>
-                <option>all</option>
+              <select id="inputState" class="form-select" formControlName="categoryTo">
+                <option [ngValue]="category._id" *ngFor="let category of categories">{{category.name}}</option>
               </select>
-              <!-- <option *ngFor="let city of City" [ngValue]="city">
-                {{ city }}
-              </option> -->
-
             </div>
-
             <div class="col-8">
               <div class="row">
                 <div class="col-9 pt-3 mt-3">
@@ -48,19 +42,25 @@
               </div>
 
             </div>
-            <div
-              *ngIf="productForm.controls['category'].invalid && (productForm.controls['category'].dirty || productForm.controls['category'].touched)"
-              class="alert alert-danger">
-              Select product category or add a new category
-            </div>
           </div>
         </div>
-        <div class="col-md-12 mb-2 pb-1">
-          <label class="form-label" for="customFile">Image</label>
-          <input type="file" class="form-control" id="customFile" formControlName="img"
-            (change)="onImagePicked($event)" />
+        <div
+          *ngIf="productForm.controls['categoryTo'].invalid && (productForm.controls['categoryTo'].dirty || productForm.controls['categoryTo'].touched)"
+          class="alert alert-danger">
+          Select product category or add a new category
         </div>
 
+        <div class="form-outline">
+          <label class="form-label" for="image">Image</label>
+          <input type="text" id="img" class="form-control form-control-lg" formControlName="img" />
+          <!-- <input type="file" class="form-control" id="customFile" formControlName="img"
+                      (change)="onImagePicked($event)" /> -->
+        </div>
+        <div
+          *ngIf="productForm.controls['img'].invalid && (productForm.controls['img'].dirty || productForm.controls['img'].touched)"
+          class="alert alert-danger">
+          Image url is required
+        </div>
         <div class="mt-4 pt-2 d-flex justify-content-center">
           <input class="btn btn-primary btn-lg" type="submit" [disabled]="!productForm.valid" value="Save" />
           <input class="btn btn-danger btn-lg ms-2" type="reset" value="Reset" />
