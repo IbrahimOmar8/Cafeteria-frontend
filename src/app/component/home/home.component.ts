@@ -9,10 +9,11 @@ import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
   content?: string;
+<<<<<<< HEAD
   OutPutTestAPI :String = "";
   orderList : Iorder[] =  [];
   producOrdereList : Iprodcut [] = []
@@ -22,31 +23,39 @@ export class HomeComponent implements OnInit {
 startDate:Date= new Date();
 endDate:Date = new Date()
 pipe = new DatePipe('en-US');
+=======
+  OutPutTestAPI: String = '';
+  orderList: Iorder[] = [];
 
-  constructor(private userService: UserService,
-    private authService:AuthService ,
-    private orderService :OrderService) { }
+  producOrdereList: Iprodcut[] = [];
+
+  OrderSelct: string = '[0]';
+>>>>>>> b5118d9db00e32313033ac8a28507abc23cd6459
+
+  constructor(
+    private userService: UserService,
+    private authService: AuthService,
+    private orderService: OrderService
+  ) {}
 
   ngOnInit(): void {
-        this.orderService.getAllOrders().subscribe((data: any) => {
-          this.orderList = data;
-        this.producOrdereList =  this.orderList[0].Prodeuct;          
-        });
+    this.orderService.getAllOrders().subscribe((data: any) => {
+      this.orderList = data;
+      if (this.orderList.length > 0) {
+        this.producOrdereList = this.orderList[0].Prodeuct;
+      }
+      // console.log(this.orderList[0].Prodeuct);
+    });
   }
 
+  ShowProduct(orderID: string) {
+    this.OrderSelct = orderID;
+    const orderSelct = this.orderList.filter((obj) => obj._id == orderID);
 
-  ShowProduct(orderID :string){
-    this.OrderSelct = orderID ;     
-    const orderSelct = this.orderList.filter( (obj) =>
-    obj._id == orderID
-    )
-
-      console.log(orderSelct);
-      
-    
-    this.producOrdereList = orderSelct[0].Prodeuct
+    this.producOrdereList = orderSelct[0].Prodeuct;
 
     //console.log(this.producOrdereList);
+<<<<<<< HEAD
 
    }
 
@@ -59,4 +68,7 @@ pipe = new DatePipe('en-US');
     }); 
   }
 
+=======
+  }
+>>>>>>> b5118d9db00e32313033ac8a28507abc23cd6459
 }

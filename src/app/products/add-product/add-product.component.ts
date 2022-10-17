@@ -6,6 +6,8 @@ import {
   Validators,
   FormBuilder,
 } from '@angular/forms';
+import { Category } from '../interfaces/category';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-product',
@@ -14,10 +16,11 @@ import {
 })
 export class AddProductComponent implements OnInit {
   productForm: FormGroup;
-  categories: any;
+  categories: Category[] = [];
   constructor(
     public fb: FormBuilder,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private route: Router
   ) {
     this.productForm = this.fb.group({
       name: [
@@ -29,7 +32,7 @@ export class AddProductComponent implements OnInit {
         ],
       ],
       price: ['', [Validators.required]],
-      category: ['', [Validators.required]],
+      categoryTo: [null, [Validators.required]],
       img: ['', [Validators.required]],
     });
   }
@@ -42,24 +45,22 @@ export class AddProductComponent implements OnInit {
       error: (err: Error) => alert(err.message),
       complete: () => console.log(`completed! Done!`, this.categories),
     };
-    // this.productsService.getCategories().subscribe(observer);
+    this.productsService.getCategories().subscribe(observer);
   }
+
   get newCategory() {
     return this.productForm.get('category');
   }
-  changeCategory(e: any) {
-    //  this.cityName?.setValue(e.target.value, {
-    //    onlySelf: true,
-    //  });
-  }
   onSubmit(): void {
-    // this.isSubmitted = true;
     const observer = {
       next: () => {
         alert('added succesfully next!');
       },
       error: (err: Error) => alert(err.message),
-      complete: () => console.log('completed! Done!'),
+      complete: () => {
+        console.log(this.productForm.value);
+        this.route.navigateByUrl('/home');
+      },
     };
     if (this.productForm.valid) {
       this.productsService
@@ -67,19 +68,24 @@ export class AddProductComponent implements OnInit {
         .subscribe(observer);
     }
   }
-  onImagePicked(event: Event) {
-    const file = (event.target as HTMLInputElement).files;
+  // onImagePicked(event: Event) {
+  //   const file = (event.target as HTMLInputElement).files;
 
-    if (file) {
-      const parsedFile = file[0];
-      // this.productForm.patchValue({ img: parsedFile });
-      let img = this.productForm.get('img');
-      if (img) {
-        img.updateValueAndValidity();
-        console.log(img);
-      }
-    }
-
-    console.log(this.productForm);
-  }
+  //   if (file) {
+  //     const parsedFile = file[0];
+  //     // this.productForm.patchValue({ img: parsedFile });
+  //     let img = this.productForm.get('img');
+  //     if (img) {
+  //       img.updateValueAndValidity();
+  //       console.log(img);
+  //     }
+  //   }
+  // }
+  // onChangeCategory(e: any) {
+  // let cat = this.productForm.get('category');
+  // if (cat) {
+  //   this.productForm?.setValue(cat, {
+  //      img: true,
+  //   });
+  // }}
 }
