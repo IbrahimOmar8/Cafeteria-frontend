@@ -68,6 +68,5 @@ export class ProductsListComponent implements OnInit {
         this.products = data;
       });
     }
-    console.log(this.products);
   }
 }

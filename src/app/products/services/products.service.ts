@@ -15,11 +15,11 @@ import { Category } from '../interfaces/category';
 export class ProductsService {
   httpOption;
   products: Product[] = [];
+  checkCategoryChange: Boolean = false;
   constructor(private http: HttpClient) {
     this.httpOption = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // 'Authorization': "sfkugkrbf"
       }),
     };
   }
@@ -70,6 +70,9 @@ export class ProductsService {
     return this.http
       .get<Category[]>(`${environment.BasicURL}/category`)
       .pipe(retry(2), catchError(this.handleErr));
+}
+  onChangeProd(product:Product[]){
+  return  this.products = product
   }
   getProductsOfCategory(categoryName: any): Observable<any> {
     return this.http
@@ -84,7 +87,19 @@ export class ProductsService {
       .pipe(retry(2), catchError(this.handleErr));
 
 }
-  onChangeProd(product:Product[]){
-  return  this.products = product
+  
+  addCategory(category: Category): Observable<Category> {
+    return this.http
+      .post<Category>(
+        `${environment.BasicURL}/category`,
+        JSON.stringify(category),
+        this.httpOption
+      )
+      .pipe(retry(2), catchError(this.handleErr));
+  }
+  getProductDetails(id: any): Observable<any> {
+    return this.http
+      .get<Product[]>(`${environment.BasicURL}/product/${id}`)
+      .pipe(retry(2), catchError(this.handleErr));
   }
 }

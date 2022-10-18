@@ -1,11 +1,6 @@
 import { ProductsService } from './../services/products.service';
-import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder,
-} from '@angular/forms';
+import { Component, OnInit, SimpleChanges, DoCheck } from '@angular/core';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Category } from '../interfaces/category';
 import { Router } from '@angular/router';
 
@@ -43,13 +38,29 @@ export class AddProductComponent implements OnInit {
         this.categories = data;
       },
       error: (err: Error) => alert(err.message),
-      complete: () => console.log(`completed! Done!`, this.categories),
+      complete: () => console.log(`completed! Done! ngOnInit`, this.categories),
     };
     this.productsService.getCategories().subscribe(observer);
   }
 
   get newCategory() {
     return this.productForm.get('category');
+  }
+  ngDoCheck() {
+    const observer = {
+      next: (data: any) => {
+        this.categories = data;
+      },
+      error: (err: Error) => alert(err.message),
+      complete: () => console.log(`completed! Done!`, this.categories),
+    };
+    // check for object mutation
+    if (this.productsService.checkCategoryChange === true) {
+      this.productsService.getCategories().subscribe(observer);
+      this.productsService.checkCategoryChange = false;
+      console.log(this.productsService.checkCategoryChange);
+      console.log('NG ON CHANGES');
+    }
   }
   onSubmit(): void {
     const observer = {
@@ -88,4 +99,7 @@ export class AddProductComponent implements OnInit {
   //      img: true,
   //   });
   // }}
+  resetForm() {
+    this.productForm.reset();
+  }
 }

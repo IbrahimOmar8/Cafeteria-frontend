@@ -13,16 +13,15 @@ import { DatePipe } from '@angular/common';
 })
 export class HomeComponent implements OnInit {
   content?: string;
-
   OutPutTestAPI :String = "";
   orderList : Iorder[] =  [];
   producOrdereList : Iprodcut [] = []
   OrderSelct :string ="[0]" ;
   orderDate : Iorder[] =  [];
 
-startDate:Date= new Date();
-endDate:Date = new Date()
-pipe = new DatePipe('en-US');
+  startDate: Date = new Date();
+  endDate: Date = new Date();
+  pipe = new DatePipe('en-US');
 
   constructor(
     private userService: UserService,
@@ -42,22 +41,22 @@ pipe = new DatePipe('en-US');
 
   ShowProduct(orderID: string) {
     this.OrderSelct = orderID;
-    const orderSelct = this.orderList.filter((obj) => obj._id == orderID);
+    const orderSelct = this.orderDate.filter((obj) => obj._id == orderID);
 
     this.producOrdereList = orderSelct[0].Prodeuct;
 
     //console.log(this.producOrdereList);
+
+   }
+
+  handleSelect() {
+    this.orderService
+      .getOrdersByDate(this.startDate, this.endDate)
+      .subscribe((data: any) => {
+        this.orderDate = data;
+        console.log(this.startDate, this.endDate);
+
+        console.log(data);
+      });
   }
-
-   
-
-  handleSelect(){
-    this.orderService.getOrdersByDate(this.startDate, this.endDate).subscribe((data: any) => {
-      this.orderDate = data;
-      console.log(this.startDate , this.endDate);
-
-      console.log(data);
-    }); 
-  }
-
 }
