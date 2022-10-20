@@ -26,11 +26,12 @@ export class AddOrderComponent implements OnInit {
   user: Iuser = {} as Iuser;
   total: number = 0;
 
-  orderDate: Iorder[] = [];
-  startDate: Date = new Date('2021-01-11');
-  endDate: Date = new Date('2022-11-01');
+  orderDate : Iorder[] =  [];
+  startDate:Date =new Date("2021-01-11")
+  endDate:Date =new Date("2022-11-01")
   // prevMonth:any = new Date();
-  MyOrder: Iorder = {} as Iorder;
+  MyOrder :Iorder ={} as Iorder ;
+
   products: Iprodcut[] = [];
   Orderproducts: Iprodcut[] = [];
   objOrderForAdd: IOrderForAdd = {} as IOrderForAdd;
@@ -50,6 +51,7 @@ export class AddOrderComponent implements OnInit {
     // console.log(this.startDate , this.endDate);
   }
 
+
   ngOnInit(): void {
     this.productsService.getProducts().subscribe((data: any) => {
       this.products = data;
@@ -57,21 +59,20 @@ export class AddOrderComponent implements OnInit {
 
     this.isLoggedIn = this.storageService.isLoggedIn();
 
-    if (this.isLoggedIn) {
-      this.user = this.storageService.getUser();
-      this.roles = this.user.roles;
-      this.IsAdmin = this.roles.includes('ROLE_ADMIN');
-      this.IsUser = this.roles.includes('ROLE_USER');
-    }
-    this.orderServ
-      .getOrdersByDate(this.startDate, this.endDate)
-      .subscribe((data: any) => {
+   if (this.isLoggedIn) {
+        this.user = this.storageService.getUser();
+        this.roles = this.user.roles;
+        this.IsAdmin = this.roles.includes('ROLE_ADMIN');
+        this.IsUser = this.roles.includes('ROLE_USER');
+      }
+      this.orderServ.getOrdersByDate(this.startDate, this.endDate).subscribe((data: any) => {
         this.orderDate = data;
         console.log(this.startDate, this.endDate);
 
         console.log(data);
       });
-  }
+
+    }
 
   addProdcut(prod: Product) {
     let isFrist = true;

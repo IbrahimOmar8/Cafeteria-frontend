@@ -13,11 +13,11 @@ import { DatePipe } from '@angular/common';
 })
 export class HomeComponent implements OnInit {
   content?: string;
-  OutPutTestAPI: String = '';
-  orderList: Iorder[] = [];
-  producOrdereList: Iprodcut[] = [];
-  OrderSelct: string = '[0]';
-  orderDate: Iorder[] = [];
+  OutPutTestAPI :String = "";
+  orderList : Iorder[] =  [];
+  producOrdereList : Iprodcut [] = []
+  OrderSelct :string ="[0]" ;
+  orderDate : Iorder[] =  [];
 
   startDate: Date = new Date();
   endDate: Date = new Date();
@@ -46,7 +46,8 @@ export class HomeComponent implements OnInit {
     this.producOrdereList = orderSelct[0].Prodeuct;
 
     //console.log(this.producOrdereList);
-  }
+
+   }
 
   handleSelect() {
     this.orderService
